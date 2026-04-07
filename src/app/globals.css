@@ -126,3 +126,53 @@ html.lenis body {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+
+@keyframes skill-slide-right {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+@keyframes skill-slide-left {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-8px);
+  }
+}
+
+@keyframes skill-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-skill-slide-right {
+  animation: skill-slide-right 16s ease-in-out infinite;
+}
+
+.animate-skill-slide-left {
+  animation: skill-slide-left 16s ease-in-out infinite;
+}
+
+.animate-skill-float {
+  animation: skill-float 12s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .animate-skill-slide-right,
+  .animate-skill-slide-left,
+  .animate-skill-float {
+    animation: none;
+  }
+}

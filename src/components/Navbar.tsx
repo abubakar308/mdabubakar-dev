@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, FileText, X, Github, Linkedin, Facebook, Mail } from "lucide-react";
+import { Menu, X, Github, Linkedin, Facebook, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -74,14 +74,14 @@ export default function Navbar() {
         </Magnetic>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7 lg:gap-8">
           {navLinks.map((link) => (
             <motion.div
               key={link.name}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link
+              <a
                 href={link.href}
                 className={cn(
                   "text-sm font-bold uppercase tracking-widest hover:text-accent-brand transition-colors",
@@ -89,18 +89,9 @@ export default function Navbar() {
                 )}
               >
                 {link.name}
-              </Link>
+              </a>
             </motion.div>
           ))}
-          <Magnetic>
-            <Button
-              variant="outline"
-              className="border-accent-brand text-accent-brand hover:bg-accent-brand hover:text-primary-foreground rounded-full px-6 font-bold shadow-sm hover:scale-105 active:scale-95 transition-transform"
-            >
-              <FileText className="w-4 h-4 mr-2" />
-              Resume
-            </Button>
-          </Magnetic>
 
           <Magnetic>
             <ThemeToggle />
@@ -141,7 +132,7 @@ export default function Navbar() {
                 {/* Main Links */}
                 <nav className="flex-1 px-4 py-4 flex flex-col gap-1">
                   {navLinks.map((link) => (
-                    <Link
+                    <a
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
@@ -149,22 +140,12 @@ export default function Navbar() {
                     >
                       {link.name}
                       <span className="w-1.5 h-1.5 rounded-full bg-accent-brand scale-0 group-hover:scale-100 transition-transform" />
-                    </Link>
+                    </a>
                   ))}
                 </nav>
 
                 {/* Footer Section */}
                 <div className="p-6 pt-0 mt-auto space-y-8">
-                   <div className="space-y-4">
-                      <Button
-                        variant="outline"
-                        className="w-full border-accent-brand text-accent-brand hover:bg-accent-brand hover:text-white rounded-2xl h-14 font-bold shadow-md hover:scale-[1.02] active:scale-95 transition-all text-sm uppercase tracking-widest"
-                      >
-                        <FileText className="w-4 h-4 mr-2" />
-                        Download Resume
-                      </Button>
-                   </div>
-
                    <div className="space-y-4">
                       <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 pl-1">Keep in Touch</p>
                       <div className="flex gap-3">

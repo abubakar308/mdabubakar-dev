@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useSpring, useTransform, useMotionTemplate } from "framer-motion";
-import { GithubIcon as Github, LinkedinIcon as Linkedin, FacebookIcon as Facebook, Mail, FileText, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { motion, useMotionTemplate, useScroll, useSpring, useTransform } from "framer-motion";
+import { GithubIcon as Github, LinkedinIcon as Linkedin, Facebook, Mail, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
@@ -9,22 +10,39 @@ import { useMousePosition } from "@/hooks/useMousePosition";
 import Magnetic from "@/components/common/Magnetic";
 
 const socialLinks = [
-  { name: "GitHub", href: "https://github.com/mdabubakarsiddique", icon: Github },
-  { name: "LinkedIn", href: "https://linkedin.com/in/mdabubakarsiddique", icon: Linkedin },
-  { name: "Facebook", href: "https://facebook.com/mdabubakarsiddique", icon: Facebook },
-  { name: "Email", href: "mailto:abubakar@example.com", icon: Mail },
+  { name: "GitHub", href: "https://github.com/abubakar308", icon: Github },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/abubakar308/", icon: Linkedin },
+  { name: "Facebook", href: "https://www.facebook.com/mdabubakar308", icon: Facebook },
+  { name: "Email", href: "mailto:mdabubakar.dev@gmail.com", icon: Mail },
 ];
 
 export default function Hero() {
   const { x, y } = useMousePosition();
+  const { scrollYProgress } = useScroll();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const handleChange = () => setIsMobile(mediaQuery.matches);
+
+    handleChange();
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   // Parallax transforms for the hero image
   // We use spring for smoother motion
   const mouseX = useSpring(x, { stiffness: 50, damping: 20 });
   const mouseY = useSpring(y, { stiffness: 50, damping: 20 });
 
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10]);
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-8, 8]);
+
+  const parallaxAmount = isMobile ? 0.35 : 1;
+  const orbLeftY = useTransform(scrollYProgress, [0, 1], [0, 60 * parallaxAmount]);
+  const orbRightY = useTransform(scrollYProgress, [0, 1], [0, -45 * parallaxAmount]);
+  const heroImageY = useTransform(scrollYProgress, [0, 1], [0, -40 * parallaxAmount]);
+  const floatingCardY = useTransform(scrollYProgress, [0, 1], [0, -28 * parallaxAmount]);
 
   // Use motion template for the radial gradient to avoid re-renders
   const backgroundX = useTransform(x, (val) => 50 + val * 100);
@@ -41,8 +59,14 @@ export default function Hero() {
 
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-[10%] -left-[10%] w-[45%] h-[45%] bg-accent-brand/10 rounded-full blur-[130px] animate-pulse" />
-        <div className="absolute top-[20%] -right-[5%] w-[35%] h-[35%] bg-accent-soft/8 rounded-full blur-[110px]" />
+        <motion.div
+          style={{ y: orbLeftY }}
+          className="absolute -top-[10%] -left-[10%] w-[45%] h-[45%] bg-accent-brand/10 rounded-full blur-[130px] animate-pulse"
+        />
+        <motion.div
+          style={{ y: orbRightY }}
+          className="absolute top-[20%] -right-[5%] w-[35%] h-[35%] bg-accent-soft/8 rounded-full blur-[110px]"
+        />
         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-background via-background/40 to-transparent" />
       </div>
 
@@ -75,15 +99,24 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-4">
             <Magnetic strength={0.3}>
-              <Button size="lg" className="bg-accent-brand text-primary-foreground hover:bg-accent-brand/90 rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-accent-brand/20 transition-all hover:scale-105 active:scale-95">
-                <FileText className="w-5 h-5 mr-2" />
+              <a
+                href="/Full Stack_Developer_Resume_of_Abu Bakar Siddiquel.pdf"
+                download="Full Stack_Developer_Resume_of_Abu Bakar Siddiquel.pdf"
+                className="gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:bg-indigo-700 transition-all shadow-md hover:shadow-indigo-100 inline-flex items-center justify-center"
+              >
                 Download Resume
-              </Button>
+              </a>
             </Magnetic>
-            <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-card rounded-full px-8 h-14 text-base font-bold shadow-sm transition-all hover:scale-105 active:scale-95">
-              View Projects
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
+            <a href="#contact">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-border text-foreground hover:bg-card rounded-full px-8 h-14 text-base font-bold shadow-sm transition-all hover:scale-105 hover:shadow-lg active:scale-95"
+              >
+                Get in Touch
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </a>
 
 
           </div>
@@ -114,10 +147,11 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="relative flex justify-center md:justify-end"
-          style={{ 
+          style={{
             perspective: 1000,
-            rotateX,
-            rotateY
+            y: heroImageY,
+            rotateX: isMobile ? 0 : rotateX,
+            rotateY: isMobile ? 0 : rotateY,
           }}
         >
           <div className="relative w-80 h-80 md:w-[500px] md:h-[500px] flex items-center justify-center">
@@ -151,8 +185,9 @@ export default function Hero() {
 
             {/* Decorative Card */}
             <motion.div
-              animate={{ y: [0, -10, 0] }}
+              animate={{ scale: [1, 1.02, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              style={{ y: floatingCardY }}
               className="absolute -bottom-4 right-0 md:bottom-20 md:-right-8 p-5 bg-card/80 backdrop-blur-2xl border border-border rounded-2xl shadow-2xl space-y-2 hidden sm:block"
             >
 

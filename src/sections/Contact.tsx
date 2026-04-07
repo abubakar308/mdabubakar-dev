@@ -35,8 +35,8 @@ export default function Contact() {
           <Reveal horizontal width="100%">
             <div className="space-y-10">
               <div className="space-y-8">
-                  <div className="flex items-start gap-6 group">
-                     <div className="p-4 bg-accent-brand/10 text-accent-brand rounded-2xl group-hover:scale-110 transition-transform">
+                  <div className="flex items-start gap-6 group rounded-2xl border border-border/40 bg-card/40 p-4 hover:bg-card/70 hover:border-accent-brand/30 hover:shadow-lg transition-all duration-300">
+                     <div className="p-4 bg-accent-brand/10 text-accent-brand rounded-2xl group-hover:scale-110 transition-transform duration-300">
                         <Mail className="w-6 h-6" />
                      </div>
 
@@ -47,8 +47,8 @@ export default function Contact() {
 
                  </div>
 
-                 <div className="flex items-start gap-6 group">
-                    <div className="p-4 bg-green-vibrant/10 text-green-vibrant rounded-2xl group-hover:scale-110 transition-transform">
+                 <div className="flex items-start gap-6 group rounded-2xl border border-border/40 bg-card/40 p-4 hover:bg-card/70 hover:border-accent-brand/30 hover:shadow-lg transition-all duration-300">
+                    <div className="p-4 bg-green-vibrant/10 text-green-vibrant rounded-2xl group-hover:scale-110 transition-transform duration-300">
                        <Phone className="w-6 h-6" />
                     </div>
                      <div className="space-y-1">
@@ -58,8 +58,8 @@ export default function Contact() {
 
                  </div>
 
-                 <div className="flex items-start gap-6 group">
-                    <div className="p-4 bg-amber-500/10 text-amber-500 rounded-2xl group-hover:scale-110 transition-transform">
+                 <div className="flex items-start gap-6 group rounded-2xl border border-border/40 bg-card/40 p-4 hover:bg-card/70 hover:border-accent-brand/30 hover:shadow-lg transition-all duration-300">
+                    <div className="p-4 bg-amber-500/10 text-amber-500 rounded-2xl group-hover:scale-110 transition-transform duration-300">
                        <MapPin className="w-6 h-6" />
                     </div>
                      <div className="space-y-1">
@@ -76,11 +76,11 @@ export default function Contact() {
                     <div className="h-0.5 flex-1 bg-border" />
                  </h4>
                   <div className="flex gap-4">
-                     <Button variant="outline" className="flex-1 rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all font-bold group shadow-sm hover:scale-105 active:scale-95">
+                     <Button variant="outline" className="flex-1 rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all duration-300 font-bold group shadow-sm hover:scale-105 hover:shadow-lg active:scale-95">
                         <Linkedin className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
                         LinkedIn
                      </Button>
-                     <Button variant="outline" className="flex-1 rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all font-bold group shadow-sm hover:scale-105 active:scale-95">
+                     <Button variant="outline" className="flex-1 rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all duration-300 font-bold group shadow-sm hover:scale-105 hover:shadow-lg active:scale-95">
                         <Facebook className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
                         Facebook
                      </Button>

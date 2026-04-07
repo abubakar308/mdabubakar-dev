@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, ReactNode } from "react";
+import { useEffect, useRef, useState, ReactNode } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 interface MagneticProps {
@@ -11,6 +11,7 @@ interface MagneticProps {
 
 export default function Magnetic({ children, strength = 0.5, className }: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -19,8 +20,19 @@ export default function Magnetic({ children, strength = 0.5, className }: Magnet
   const springX = useSpring(x, { stiffness: 150, damping: 20 });
   const springY = useSpring(y, { stiffness: 150, damping: 20 });
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+    const update = () => setIsTouchDevice(mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
+
+  const clamp = (value: number, min: number, max: number) =>
+    Math.max(min, Math.min(max, value));
+
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
+    if (!ref.current || isTouchDevice) return;
     const { clientX, clientY } = e;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     
@@ -28,8 +40,9 @@ export default function Magnetic({ children, strength = 0.5, className }: Magnet
     const centerX = left + width / 2;
     const centerY = top + height / 2;
     
-    const targetX = (clientX - centerX) * strength;
-    const targetY = (clientY - centerY) * strength;
+    // Keep movement subtle and predictable for a premium feel.
+    const targetX = clamp((clientX - centerX) * strength, -14, 14);
+    const targetY = clamp((clientY - centerY) * strength, -14, 14);
     
     x.set(targetX);
     y.set(targetY);
@@ -46,7 +59,7 @@ export default function Magnetic({ children, strength = 0.5, className }: Magnet
       className={className}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY }}
+      style={isTouchDevice ? undefined : { x: springX, y: springY }}
     >
       {children}
     </motion.div>

@@ -8,31 +8,33 @@ import Reveal from "@/components/common/Reveal";
 const educations = [
   {
     degree: "B.Sc. in Computer Science & Engineering",
-    institution: "Your University Name",
-    year: "2019 - 2023",
+    institution: "City University, Dhaka, Bangladesh",
+    year: "2022 - 2026",
     description: "Focused on software engineering, data structures, and web technologies.",
   },
   {
     degree: "Higher Secondary Certificate",
-    institution: "Your College Name",
-    year: "2017 - 2019",
+    institution: "Khalilganj School and College, Kurigram",
+    year: "2019 - 2020",
     description: "Science background with strong focus on mathematics and physics.",
   },
 ];
 
 const experiences = [
   {
-    title: "Full Stack Developer (Learning & Projects)",
-    company: "Self-Employed / Growth Journey",
-    year: "2023 - Present",
-    description: "Building production-grade applications using Next.js, TypeScript, and Prisma. Focusing on performance optimization and scalable architecture.",
+    title: "Full Stack Developer (Team Project)",
+    company: "University Academic Project",
+    year: "2025",
+    description:
+      "Collaborated in a team to build a role-based Certificate Management System. Implemented multi-step approval workflows, role-based access control, and backend APIs for handling certificate requests and validations.",
   },
-  {
-    title: "Frontend Developer Trainee",
-    company: "Dev Training Institute",
-    year: "2022 - 2023",
-    description: "Mastered React.js, Tailwind CSS, and modern UI design principles. Contributed to various open-source mini-projects.",
-  },
+  // {
+  //   title: "Full Stack Developer (Learning & Projects)",
+  //   company: "Self-Employed / Growth Journey",
+  //   year: "2024 - Present",
+  //   description:
+  //     "Developing full-stack applications using Next.js, TypeScript, Prisma, and PostgreSQL. Built multiple real-world projects including a certificate management system and multi-vendor platforms, focusing on scalable architecture, authentication, and performance optimization.",
+  // },
 ];
 
 export default function Experience() {

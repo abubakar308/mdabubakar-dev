@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import Magnetic from "@/components/common/Magnetic";
 
 const socialLinks = [
-  { name: "GitHub", href: "https://github.com/mdabubakarsiddique", icon: Github },
-  { name: "LinkedIn", href: "https://linkedin.com/in/mdabubakarsiddique", icon: Linkedin },
-  { name: "Facebook", href: "https://facebook.com/mdabubakarsiddique", icon: Facebook },
-  { name: "Email", href: "mailto:abubakar@example.com", icon: Mail },
+  { name: "GitHub", href: "https://github.com/abubakar308", icon: Github },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/abubakar308/", icon: Linkedin },
+  { name: "Facebook", href: "https://www.facebook.com/mdabubakar308", icon: Facebook },
+  { name: "Email", href: "mailto:mdabubakar.dev@gmail.com", icon: Mail },
 ];
 
 export default function Footer() {

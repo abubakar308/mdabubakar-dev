@@ -16,6 +16,11 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const hasServerRepo = project.github_server && project.github_server !== "#";
+  const visibleStack = project.stack.slice(0, 6);
+  const challenges = project.challenges?.slice(0, 2) ?? [];
+  const highlights = project.highlights?.slice(0, 2) ?? [];
+  const challengePreview = challenges[0];
+  const highlightPreview = highlights[0];
 
   return (
     <motion.div
@@ -27,15 +32,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       className="h-full"
     >
       <Card className="group relative h-full overflow-hidden border-2 border-border/40 bg-card shadow-sm shadow-black/5 transition-all duration-500 hover:shadow-2xl hover:shadow-black/10 flex flex-col">
-        {/* Featured Badge */}
-        {project.featured && (
-          <div className="absolute top-4 left-4 z-20">
-            <Badge className="bg-accent-brand text-primary-foreground border-none px-3 py-1 text-[10px] font-bold uppercase tracking-widest shadow-lg shadow-accent-brand/20">
-              Featured
-            </Badge>
-          </div>
-        )}
-
         {/* Project Image Container */}
         <div className="relative aspect-video overflow-hidden">
           <Image
@@ -84,6 +80,22 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 )}
               </div>
             </div>
+            {(challenges.length > 0 || highlights.length > 0) && (
+              <div className="absolute left-4 right-4 bottom-4 rounded-xl bg-black/45 border border-white/15 px-3 py-2 text-white opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                {challengePreview && (
+                  <p className="text-[11px] leading-relaxed line-clamp-1">
+                    <span className="mr-1">⚡</span>
+                    {challengePreview}
+                  </p>
+                )}
+                {highlightPreview && (
+                  <p className="text-[11px] leading-relaxed line-clamp-1 mt-1">
+                    <span className="mr-1">🚀</span>
+                    {highlightPreview}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
@@ -91,7 +103,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         <CardContent className="p-6 space-y-4 flex-grow">
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-1.5">
-            {project.stack.slice(0, 4).map((tech, i) => (
+            {visibleStack.map((tech, i) => (
               <motion.div
                 key={tech}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -106,21 +118,30 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 </Badge>
               </motion.div>
             ))}
-            {project.stack.length > 4 && (
-              <Badge variant="outline" className="bg-background/50 text-text-body/60 border-border/40 text-[9px] font-bold px-2 py-0.5">
-                +{project.stack.length - 4}
-              </Badge>
-            )}
           </div>
 
           <div>
             <h3 className="text-xl font-heading font-extrabold text-foreground group-hover:text-accent-brand transition-colors duration-300">
               {project.name}
             </h3>
-            <p className="text-text-body/70 text-sm leading-relaxed mt-2 line-clamp-3">
+            <p className="text-text-body/70 text-sm leading-relaxed mt-2 line-clamp-2 min-h-10">
               {project.description}
             </p>
           </div>
+
+          {challengePreview && (
+            <p className="text-xs text-text-body/75 leading-relaxed line-clamp-1 min-h-4">
+              <span className="mr-1.5">⚡</span>
+              {challengePreview}
+            </p>
+          )}
+
+          {highlightPreview && (
+            <p className="text-xs text-text-body/75 leading-relaxed line-clamp-1 min-h-4">
+              <span className="mr-1.5">🚀</span>
+              {highlightPreview}
+            </p>
+          )}
         </CardContent>
 
         {/* Footer with Main Actions */}
