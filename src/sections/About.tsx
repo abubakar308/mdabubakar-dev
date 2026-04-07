@@ -1,17 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { User, BookOpen, Target, Sparkles, Heart } from "lucide-react";
+import { GraduationCap, MapPin, Calendar, BookOpen, User, Target, Sparkles, Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const highlights = [
   {
     title: "Journey",
     icon: User,
     description: "From curious tinkerer to high-performance Full Stack Developer.",
-    color: "text-cyan-vibrant",
-    bg: "bg-cyan-vibrant/10",
+    color: "text-accent-brand",
+    bg: "bg-accent-brand/10",
   },
+
   {
     title: "Interests",
     icon: Sparkles,
@@ -19,6 +22,7 @@ const highlights = [
     color: "text-green-vibrant",
     bg: "bg-green-vibrant/10",
   },
+
   {
     title: "Goals",
     icon: Target,
@@ -30,7 +34,9 @@ const highlights = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6 bg-white overflow-hidden">
+    <section id="about" className="py-24 px-6 bg-section overflow-hidden">
+
+
       <div className="max-w-7xl mx-auto space-y-20">
         {/* Header */}
         <motion.div
@@ -40,13 +46,15 @@ export default function About() {
            viewport={{ once: true }}
            className="space-y-4 max-w-2xl"
         >
-          <div className="flex items-center gap-3 text-cyan-vibrant font-bold uppercase tracking-widest text-sm">
-            <span className="h-0.5 w-10 bg-cyan-vibrant" />
+          <div className="flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-sm">
+            <span className="h-0.5 w-10 bg-accent-brand" />
             About Me
           </div>
-          <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-navy">
-            Crafting Digital <span className="text-slate-text">Experiences</span>
+          <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground">
+            Crafting Digital <span className="text-accent-brand">Experiences</span>
           </h2>
+
+
         </motion.div>
 
         {/* Content Grid */}
@@ -59,7 +67,7 @@ export default function About() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="prose prose-lg text-slate-text space-y-6">
+            <div className="prose prose-lg text-text-body space-y-6">
               <p>
                 Hello! I'm <strong>Md Abu Bakar Siddique</strong>, a results-oriented Full Stack Developer with a deep love for building exceptionally clean, fast, and feature-rich web applications. My journey into development began with a fascination for how things work under the hood, and it has since evolved into a professional career focused on modern technologies and user-centric design.
               </p>
@@ -72,14 +80,17 @@ export default function About() {
             </div>
 
             {/* Quote / Highlight */}
-            <div className="p-6 bg-slate-light border-l-4 border-cyan-vibrant rounded-r-2xl italic text-navy font-medium text-lg">
+            <div className="p-6 bg-card/40 border-l-4 border-accent-brand rounded-r-2xl italic text-foreground font-medium text-lg shadow-sm">
               "Building great software is not just about writing code; it's about solving human problems through technology."
             </div>
+
+
             
-            <div className="flex gap-4 items-center text-slate-text">
+            <div className="flex gap-4 items-center text-text-body">
                <Heart className="w-5 h-5 text-red-500 fill-red-500" />
                <p className="text-sm">Driven by passion, fueled by coffee, and inspired by innovation.</p>
             </div>
+
           </motion.div>
 
           {/* Highlights Section */}
@@ -92,17 +103,18 @@ export default function About() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="border-none shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <Card className="bg-card border-2 border-border/40 shadow-sm shadow-black/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                   <CardContent className="p-8 flex gap-6 items-start">
-                    <div className={`p-4 rounded-2xl ${item.bg} ${item.color} flex-shrink-0`}>
+                    <div className={`p-4 rounded-2xl ${item.bg} ${item.color} flex-shrink-0 transition-transform group-hover:scale-110`}>
                       <item.icon className="w-6 h-6" />
                     </div>
                     <div className="space-y-2">
-                       <h3 className="text-xl font-heading font-bold text-navy">{item.title}</h3>
-                       <p className="text-slate-text leading-relaxed">{item.description}</p>
+                       <h3 className="text-xl font-heading font-bold text-foreground">{item.title}</h3>
+                       <p className="text-text-body leading-relaxed">{item.description}</p>
                     </div>
                   </CardContent>
                 </Card>
+
               </motion.div>
             ))}
             
@@ -111,18 +123,21 @@ export default function About() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
-              className="mt-4 p-8 rounded-3xl bg-navy text-white flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative"
+              className="mt-4 p-8 rounded-[2rem] bg-primary text-primary-foreground flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative shadow-2xl shadow-accent-brand/10"
             >
               <div className="z-10 text-center md:text-left">
-                <p className="text-cyan-vibrant font-bold text-sm tracking-widest uppercase mb-1">Status</p>
+                <p className="text-primary-foreground/70 font-bold text-[10px] tracking-widest uppercase mb-1">Status</p>
                 <p className="text-2xl font-heading font-extrabold">Open for Collaboration</p>
               </div>
-              <Button size="lg" variant="secondary" className="bg-white text-navy font-bold rounded-full px-8 hover:bg-slate-100 z-10 whitespace-nowrap">
+              <Button size="lg" variant="secondary" className="font-bold rounded-full px-8 z-10 whitespace-nowrap bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-lg">
                 Check My Projects
               </Button>
-              {/* Decorative circle */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-cyan-vibrant/20 rounded-full blur-3xl" />
+
+              {/* Decorative glows */}
+              <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/10 rounded-full blur-2xl" />
             </motion.div>
+
           </div>
         </div>
       </div>

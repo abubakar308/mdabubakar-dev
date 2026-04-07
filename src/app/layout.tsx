@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import BackToTop from "@/components/common/BackToTop";
+
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -30,7 +32,9 @@ export default function RootLayout({
     >
       <body className="antialiased">
         <SmoothScroll>{children}</SmoothScroll>
+        <BackToTop />
       </body>
+
     </html>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Facebook, Mail, FileText, ArrowRight } from "lucide-react";
+import { GithubIcon as Github, LinkedinIcon as Linkedin, FacebookIcon as Facebook, Mail, FileText, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
@@ -15,10 +15,14 @@ const socialLinks = [
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-navy">
-      {/* Background Glows */}
-      <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-cyan-vibrant/20 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-green-vibrant/10 blur-[120px] rounded-full pointer-events-none" />
+    <section id="home" className="relative min-h-screen flex items-center pt-20 bg-background overflow-hidden selection:bg-accent-brand/30">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-[10%] -left-[10%] w-[45%] h-[45%] bg-accent-brand/10 rounded-full blur-[130px] animate-pulse" />
+        <div className="absolute top-[20%] -right-[5%] w-[35%] h-[35%] bg-accent-soft/8 rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-background via-background/40 to-transparent" />
+      </div>
+
 
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10 w-full">
         {/* Left Column */}
@@ -29,30 +33,34 @@ export default function Hero() {
           className="space-y-8"
         >
           <div className="space-y-4">
-            <Badge variant="outline" className="text-cyan-vibrant border-cyan-vibrant/30 bg-cyan-vibrant/5 hover:bg-cyan-vibrant/10 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest">
+            <Badge variant="outline" className="text-accent-brand border-accent-brand/30 bg-accent-brand/5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
               Available for Opportunities
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-heading font-extrabold text-white leading-tight tracking-tighter">
+            <h1 className="text-5xl md:text-7xl font-heading font-extrabold text-foreground leading-[1.1] tracking-tighter">
               Hi, I'm <br />
-              <span className="text-cyan-vibrant">Md Abu Bakar Siddique</span>
+              <span className="text-accent-brand">Md Abu Bakar Siddique</span>
             </h1>
-            <p className="text-xl md:text-2xl font-medium text-slate-300 font-heading">
-              Full Stack Developer | Next.js | TypeScript | Prisma | PostgreSQL
+            <p className="text-xl md:text-2xl font-semibold text-text-body font-heading">
+              Full Stack Developer | Next.js | TypeScript | Prisma
             </p>
-            <p className="text-slate-text max-w-xl text-lg leading-relaxed">
+
+            <p className="text-text-body max-w-xl text-lg leading-relaxed">
               I specialize in building exceptionally high-performance, modern, and scalable full-stack web applications with advanced UI/UX and robust backends.
             </p>
+
           </div>
 
           <div className="flex flex-wrap gap-4">
-            <Button size="lg" className="bg-cyan-vibrant text-navy hover:bg-cyan-vibrant/90 rounded-full px-8 h-14 text-base font-bold shadow-lg shadow-cyan-vibrant/20">
+            <Button size="lg" className="bg-accent-brand text-primary-foreground hover:bg-accent-brand/90 rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-accent-brand/20 transition-all hover:-translate-y-1">
               <FileText className="w-5 h-5 mr-2" />
               Download Resume
             </Button>
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full px-8 h-14 text-base font-bold">
+            <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-card rounded-full px-8 h-14 text-base font-bold shadow-sm transition-all hover:-translate-y-1">
               View Projects
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
+
+
           </div>
 
           <div className="flex gap-6 items-center">
@@ -62,7 +70,9 @@ export default function Hero() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white/5 border border-white/10 rounded-xl text-slate-300 hover:text-cyan-vibrant hover:border-cyan-vibrant hover:-translate-y-1 transition-all duration-300"
+                className="p-3.5 bg-card border border-border rounded-2xl text-text-body hover:text-accent-brand hover:border-accent-brand hover:shadow-lg transition-all duration-300"
+
+
                 title={social.name}
               >
                 <social.icon className="w-5 h-5" />
@@ -82,20 +92,20 @@ export default function Hero() {
             {/* Spinning Glow Ring */}
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 border-[3px] border-dashed border-cyan-vibrant/30 rounded-full"
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 border-2 border-dashed border-accent-brand/20 rounded-full"
             />
-            
-            {/* Soft Glow */}
-            <div className="absolute inset-4 bg-gradient-to-br from-cyan-vibrant/20 to-green-vibrant/10 rounded-full blur-3xl opacity-50" />
+
+            {/* Branded Glows */}
+            <div className="absolute -inset-10 bg-gradient-to-br from-accent-brand/20 to-accent-soft/10 rounded-full blur-[80px] opacity-40 dark:opacity-60" />
 
             {/* Profile Frame */}
-            <div className="relative w-[85%] h-[85%] rounded-3xl overflow-hidden border-4 border-white/10 bg-slate shadow-2xl backdrop-blur-xl group">
+            <div className="relative w-[85%] h-[85%] rounded-[2.5rem] overflow-hidden border-2 border-border bg-card shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] backdrop-blur-xl group transition-all duration-500 hover:border-accent-brand/50">
               <Image
-                src="/abubakar.png"
+                src="/images/abubakar.png"
                 alt="Md Abu Bakar Siddique"
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
                 priority
                 onError={(e) => {
                   const target = e.target as any;
@@ -103,24 +113,27 @@ export default function Hero() {
                 }}
               />
               {/* Overlay Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
+
 
             {/* Decorative Card */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-4 right-0 md:bottom-20 md:-right-8 p-5 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-2xl space-y-2 hidden sm:block"
+              className="absolute -bottom-4 right-0 md:bottom-20 md:-right-8 p-5 bg-card/80 backdrop-blur-2xl border border-border rounded-2xl shadow-2xl space-y-2 hidden sm:block"
             >
+
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-cyan-vibrant/20 flex items-center justify-center text-cyan-vibrant">
-                  <div className="w-4 h-4 bg-cyan-vibrant rounded-full animate-pulse" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand/10 flex items-center justify-center text-accent-brand">
+                  <div className="w-2.5 h-2.5 bg-accent-brand rounded-full animate-ping" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-white uppercase tracking-wider">Expertise</p>
-                  <p className="text-sm font-medium text-slate-300">Next.js & TypeScript</p>
+                  <p className="text-[10px] font-bold text-foreground uppercase tracking-widest opacity-60">Status</p>
+                  <p className="text-sm font-bold text-foreground">Available to Hire</p>
                 </div>
               </div>
+
             </motion.div>
           </div>
         </motion.div>

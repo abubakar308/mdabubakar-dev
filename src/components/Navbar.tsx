@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, FileText } from "lucide-react";
+import { Menu, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -12,6 +12,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/common/ThemeToggle";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -35,16 +36,18 @@ export default function Navbar() {
   }, []);
 
   const navClasses = cn(
-    "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4",
+    "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-5",
     scrolled
-      ? "bg-navy/80 backdrop-blur-md border-b border-white/10 py-3"
+      ? "bg-background/80 backdrop-blur-xl border-b border-border/50 py-3 shadow-[0_2px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_2px_20px_rgba(0,0,0,0.2)]"
       : "bg-transparent"
   );
 
+
   const textClasses = cn(
     "transition-colors duration-300",
-    scrolled ? "text-white" : "text-white" // Initially white for dark hero
+    scrolled ? "text-foreground" : "text-foreground"
   );
+
 
   return (
     <header className={navClasses}>
@@ -66,31 +69,36 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               className={cn(
-                "text-sm font-medium hover:text-cyan-vibrant transition-colors",
+                "text-sm font-bold uppercase tracking-widest hover:text-accent-brand transition-colors",
                 textClasses
               )}
+
             >
               {link.name}
             </Link>
           ))}
           <Button
             variant="outline"
-            className="border-cyan-vibrant text-cyan-vibrant hover:bg-cyan-vibrant hover:text-navy rounded-full px-6"
+            className="border-accent-brand text-accent-brand hover:bg-accent-brand hover:text-primary-foreground rounded-full px-6 font-bold shadow-sm"
           >
             <FileText className="w-4 h-4 mr-2" />
             Resume
           </Button>
+
+          <ThemeToggle />
         </nav>
 
         {/* Mobile Nav Trigger */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-4">
+          <ThemeToggle />
           <Drawer open={isOpen} onOpenChange={setIsOpen}>
             <DrawerTrigger asChild>
               <Button variant="ghost" size="icon" className={textClasses}>
                 <Menu className="w-6 h-6" />
               </Button>
             </DrawerTrigger>
-            <DrawerContent className="bg-navy border-white/10 text-white">
+            <DrawerContent className="bg-card border-border text-foreground">
+
               <DrawerHeader>
                 <DrawerTitle className="text-center font-heading">
                   Navigation
@@ -102,18 +110,19 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-lg font-medium hover:text-cyan-vibrant transition-colors"
+                    className="text-lg font-bold uppercase tracking-widest hover:text-accent-brand transition-colors"
                   >
                     {link.name}
                   </Link>
                 ))}
                 <Button
                   variant="outline"
-                  className="w-40 border-cyan-vibrant text-cyan-vibrant hover:bg-cyan-vibrant hover:text-navy rounded-full mt-4"
+                  className="w-40 border-accent-brand text-accent-brand hover:bg-accent-brand hover:text-primary-foreground rounded-full mt-4 font-bold shadow-md"
                 >
                   <FileText className="w-4 h-4 mr-2" />
                   Resume
                 </Button>
+
               </div>
             </DrawerContent>
           </Drawer>

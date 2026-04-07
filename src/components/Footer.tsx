@@ -12,12 +12,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full py-12 px-6 bg-slate-light border-t border-slate-200">
+    <footer className="w-full py-12 px-6 bg-slate border-t border-border">
+
       <div className="max-w-7xl mx-auto flex flex-col items-center gap-8 text-center">
         <div className="space-y-2">
-          <h2 className="text-2xl font-heading font-bold text-navy tracking-tighter">
+          <h2 className="text-2xl font-heading font-bold text-foreground tracking-tighter uppercase">
             MD ABU BAKAR SIDDIQUE
           </h2>
+
           <p className="text-slate-text max-w-md mx-auto">
             Full Stack Developer specializing in building modern, scalable web applications with Next.js and TypeScript.
           </p>
@@ -30,7 +32,8 @@ export default function Footer() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-white border border-slate-200 text-slate-text hover:text-cyan-vibrant hover:border-cyan-vibrant hover:shadow-lg transition-all duration-300"
+              className="p-3 rounded-full bg-card border border-border text-slate-text hover:text-cyan-vibrant hover:border-cyan-vibrant hover:shadow-lg transition-all duration-300"
+
             >
               <social.icon className="w-5 h-5" />
             </Link>
