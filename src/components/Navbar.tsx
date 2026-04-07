@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
+  DrawerTitle,
   DrawerTrigger,
   DrawerClose,
 } from "@/components/ui/drawer";
@@ -25,10 +26,10 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { name: "GitHub", href: "https://github.com/mdabubakarsiddique", icon: Github },
-  { name: "LinkedIn", href: "https://linkedin.com/in/mdabubakarsiddique", icon: Linkedin },
-  { name: "Facebook", href: "https://facebook.com/mdabubakarsiddique", icon: Facebook },
-  { name: "Email", href: "mailto:abubakar@example.com", icon: Mail },
+  { name: "GitHub", href: "https://github.com/abubakar308", icon: Github },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/abubakar308/", icon: Linkedin },
+  { name: "Facebook", href: "https://www.facebook.com/mdabubakar308", icon: Facebook },
+  { name: "Email", href: "mailto:mdabubakar.dev@gmail.com", icon: Mail },
 ];
 
 export default function Navbar() {
@@ -132,7 +133,9 @@ export default function Navbar() {
                 </div>
 
                 <div className="px-6 py-2">
-                   <h2 className="text-xl font-heading font-extrabold text-foreground pb-4 border-b border-border/50">Navigation</h2>
+                   <DrawerTitle className="text-xl font-heading font-extrabold text-foreground pb-4 border-b border-border/50">
+                     Navigation
+                   </DrawerTitle>
                 </div>
 
                 {/* Main Links */}

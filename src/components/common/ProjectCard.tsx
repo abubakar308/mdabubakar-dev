@@ -24,9 +24,9 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       whileHover={{ y: -10 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="group h-full"
+      className="h-full"
     >
-      <Card className="h-full border-2 border-border/40 shadow-sm shadow-black/5 hover:shadow-2xl overflow-hidden transition-all duration-500 bg-card flex flex-col relative">
+      <Card className="group relative h-full overflow-hidden border-2 border-border/40 bg-card shadow-sm shadow-black/5 transition-all duration-500 hover:shadow-2xl hover:shadow-black/10 flex flex-col">
         {/* Featured Badge */}
         {project.featured && (
           <div className="absolute top-4 left-4 z-20">
@@ -42,28 +42,48 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             src={project.image}
             alt={project.name}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            className="object-cover transition-all duration-700 ease-out will-change-transform group-hover:scale-105 group-hover:blur-[0.5px]"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={(e) => {
               e.currentTarget.src = `https://placehold.co/600x400/0F172A/06B6D4?text=${encodeURIComponent(project.name)}`;
             }}
           />
-          {/* Overlay with Quick Links */}
-          <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-4 backdrop-blur-sm z-10">
-            <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                <Button size="icon" className="bg-foreground text-background hover:bg-accent-brand hover:text-primary-foreground rounded-full shadow-lg">
-                  <ExternalLink className="w-5 h-5" />
-                </Button>
-              </motion.div>
-            </a>
-            <a href={project.github_client} target="_blank" rel="noopener noreferrer">
-              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                <Button size="icon" className="bg-foreground text-background hover:bg-accent-brand hover:text-primary-foreground rounded-full shadow-lg">
-                  <Github className="w-5 h-5" />
-                </Button>
-              </motion.div>
-            </a>
+          {/* Premium Hover Overlay */}
+          <div className="absolute inset-0 z-10 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 pointer-events-none group-hover:pointer-events-auto">
+            <div className="absolute inset-0 flex items-center justify-center p-4">
+              <div className="flex flex-col sm:flex-row items-center gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                  <Button
+                    size="sm"
+                    className="h-11 rounded-full px-5 bg-primary text-primary-foreground hover:bg-accent-brand shadow-lg shadow-black/20 hover:shadow-accent-brand/20 transition-all"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Live Demo
+                  </Button>
+                </a>
+
+                <a href={project.github_client} target="_blank" rel="noopener noreferrer">
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    className="h-11 rounded-full px-5 shadow-lg shadow-black/15 hover:shadow-black/25 transition-all"
+                  >
+                    <Github className="w-4 h-4 mr-2" />
+                    GitHub
+                  </Button>
+                </a>
+
+                {project.challenges && (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-11 rounded-full px-5 bg-white/10 border-white/20 text-white hover:bg-white/15 hover:border-white/30 shadow-lg shadow-black/10"
+                  >
+                    Details
+                  </Button>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
