@@ -1,10 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 import { GithubIcon as Github, LinkedinIcon as Linkedin, FacebookIcon as Facebook, Mail, FileText, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { useMousePosition } from "@/hooks/useMousePosition";
+import Magnetic from "@/components/common/Magnetic";
 
 const socialLinks = [
   { name: "GitHub", href: "https://github.com/mdabubakarsiddique", icon: Github },
@@ -14,8 +16,29 @@ const socialLinks = [
 ];
 
 export default function Hero() {
+  const { x, y } = useMousePosition();
+
+  // Parallax transforms for the hero image
+  // We use spring for smoother motion
+  const mouseX = useSpring(x, { stiffness: 50, damping: 20 });
+  const mouseY = useSpring(y, { stiffness: 50, damping: 20 });
+
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10]);
+
+  // Use motion template for the radial gradient to avoid re-renders
+  const backgroundX = useTransform(x, (val) => 50 + val * 100);
+  const backgroundY = useTransform(y, (val) => 50 + val * 100);
+  const background = useMotionTemplate`radial-gradient(600px circle at ${backgroundX}% ${backgroundY}%, rgba(6, 182, 212, 0.15), transparent 80%)`;
+
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 bg-background overflow-hidden selection:bg-accent-brand/30">
+      {/* Background Interactive Glow */}
+      <motion.div 
+        className="absolute inset-0 pointer-events-none z-0 opacity-40"
+        style={{ background }}
+      />
+
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] -left-[10%] w-[45%] h-[45%] bg-accent-brand/10 rounded-full blur-[130px] animate-pulse" />
@@ -37,7 +60,7 @@ export default function Hero() {
               Available for Opportunities
             </Badge>
             <h1 className="text-5xl md:text-7xl font-heading font-extrabold text-foreground leading-[1.1] tracking-tighter">
-              Hi, I'm <br />
+              Hi, I&apos;m <br />
               <span className="text-accent-brand">Md Abu Bakar Siddique</span>
             </h1>
             <p className="text-xl md:text-2xl font-semibold text-text-body font-heading">
@@ -51,11 +74,13 @@ export default function Hero() {
           </div>
 
           <div className="flex flex-wrap gap-4">
-            <Button size="lg" className="bg-accent-brand text-primary-foreground hover:bg-accent-brand/90 rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-accent-brand/20 transition-all hover:-translate-y-1">
-              <FileText className="w-5 h-5 mr-2" />
-              Download Resume
-            </Button>
-            <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-card rounded-full px-8 h-14 text-base font-bold shadow-sm transition-all hover:-translate-y-1">
+            <Magnetic strength={0.3}>
+              <Button size="lg" className="bg-accent-brand text-primary-foreground hover:bg-accent-brand/90 rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-accent-brand/20 transition-all hover:scale-105 active:scale-95">
+                <FileText className="w-5 h-5 mr-2" />
+                Download Resume
+              </Button>
+            </Magnetic>
+            <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-card rounded-full px-8 h-14 text-base font-bold shadow-sm transition-all hover:scale-105 active:scale-95">
               View Projects
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
@@ -65,7 +90,9 @@ export default function Hero() {
 
           <div className="flex gap-6 items-center">
             {socialLinks.map((social) => (
-              <a
+              <motion.a
+                whileHover={{ scale: 1.1, translateY: -5 }}
+                whileTap={{ scale: 0.9 }}
                 key={social.name}
                 href={social.href}
                 target="_blank"
@@ -76,7 +103,7 @@ export default function Hero() {
                 title={social.name}
               >
                 <social.icon className="w-5 h-5" />
-              </a>
+              </motion.a>
             ))}
           </div>
         </motion.div>
@@ -87,6 +114,11 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="relative flex justify-center md:justify-end"
+          style={{ 
+            perspective: 1000,
+            rotateX,
+            rotateY
+          }}
         >
           <div className="relative w-80 h-80 md:w-[500px] md:h-[500px] flex items-center justify-center">
             {/* Spinning Glow Ring */}
@@ -108,8 +140,8 @@ export default function Hero() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 priority
                 onError={(e) => {
-                  const target = e.target as any;
-                  target.src = "https://placehold.co/600x600/0F172A/06B6D4?text=Md+Abu+Bakar+Siddique";
+                  e.currentTarget.src =
+                    "https://placehold.co/600x600/0F172A/06B6D4?text=Md+Abu+Bakar+Siddique";
                 }}
               />
               {/* Overlay Gradient */}

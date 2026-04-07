@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Laptop, Database, Server, Settings, Terminal, ShieldCheck } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Reveal from "@/components/common/Reveal";
 
 const skillCategories = [
   {
@@ -43,39 +44,27 @@ export default function Skills() {
         
         <div className="max-w-7xl mx-auto space-y-20 relative z-10">
           {/* Header */}
-          <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.6 }}
-             viewport={{ once: true }}
-             className="text-center space-y-4 max-w-3xl mx-auto"
-          >
-            <div className="inline-flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-sm mb-2">
-              <span className="h-0.5 w-10 bg-accent-brand" />
-              Technical Arsenal
-              <span className="h-0.5 w-10 bg-accent-brand" />
+          <Reveal className="mx-auto" width="100%">
+            <div className="text-center space-y-4 max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-sm mb-2">
+                <span className="h-0.5 w-10 bg-accent-brand" />
+                Technical Arsenal
+                <span className="h-0.5 w-10 bg-accent-brand" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground">
+                Comprehensive <span className="text-accent-brand">Skillset</span>
+              </h2>
+
+              <p className="text-lg text-text-body leading-relaxed max-w-2xl mx-auto">
+                I leverage a range of cutting-edge technologies to build performant, user-centric web applications and robust architectures.
+              </p>
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground">
-              Comprehensive <span className="text-accent-brand">Skillset</span>
-            </h2>
-
-            <p className="text-lg text-text-body leading-relaxed max-w-2xl mx-auto">
-
-
-              I leverage a range of cutting-edge technologies to build performant, user-centric web applications and robust architectures.
-            </p>
-          </motion.div>
+          </Reveal>
 
           {/* Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {skillCategories.map((category, idx) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                viewport={{ once: true }}
-              >
+              <Reveal key={category.title} delay={0.1 * idx} className="h-full w-full" width="100%">
                 <Card className="h-full border-2 border-border/40 shadow-sm shadow-black/5 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 bg-card group">
 
 
@@ -93,55 +82,53 @@ export default function Skills() {
 
                     <div className="flex flex-wrap justify-center gap-2">
                       {category.skills.map((skill) => (
-                        <Badge
+                        <motion.div
                           key={skill}
-                          variant="outline"
-                          className="bg-background/50 text-text-body border-border hover:bg-accent-brand hover:text-primary-foreground hover:shadow-md transition-all duration-200 cursor-default px-3 py-1 text-[10px] font-bold uppercase tracking-wider"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
                         >
-
-
-                          {skill}
-                        </Badge>
+                          <Badge
+                            variant="outline"
+                            className="bg-background/50 text-text-body border-border hover:bg-accent-brand hover:text-primary-foreground hover:shadow-md transition-all duration-200 cursor-default px-3 py-1 text-[10px] font-bold uppercase tracking-wider"
+                          >
+                            {skill}
+                          </Badge>
+                        </motion.div>
                       ))}
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
 
           {/* Extra Highlights */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="p-10 rounded-3xl bg-card border border-border shadow-lg flex flex-wrap justify-center gap-12"
-          >
+          <Reveal delay={0.4} width="100%">
+            <div className="p-10 rounded-3xl bg-card border border-border shadow-lg flex flex-wrap justify-center gap-12">
+               <div className="flex items-center gap-4 group cursor-default">
+                 <ShieldCheck className="w-10 h-10 text-accent-brand group-hover:scale-110 transition-transform" />
 
-             <div className="flex items-center gap-4 group">
-               <ShieldCheck className="w-10 h-10 text-accent-brand group-hover:scale-110 transition-transform" />
-
-               <div>
-                  <p className="font-heading font-bold text-foreground">Security First</p>
-                  <p className="text-muted-foreground text-sm">Focus on robust auth & data protection</p>
+                 <div>
+                    <p className="font-heading font-bold text-foreground">Security First</p>
+                    <p className="text-muted-foreground text-sm">Focus on robust auth & data protection</p>
+                 </div>
                </div>
-             </div>
-             <div className="flex items-center gap-4 group">
-               <Terminal className="w-10 h-10 text-green-vibrant group-hover:scale-110 transition-transform" />
-               <div>
-                  <p className="font-heading font-bold text-foreground">Optimized Code</p>
-                  <p className="text-muted-foreground text-sm">Clean architectural patterns</p>
+               <div className="flex items-center gap-4 group cursor-default">
+                 <Terminal className="w-10 h-10 text-green-vibrant group-hover:scale-110 transition-transform" />
+                 <div>
+                    <p className="font-heading font-bold text-foreground">Optimized Code</p>
+                    <p className="text-muted-foreground text-sm">Clean architectural patterns</p>
+                 </div>
                </div>
-             </div>
-             <div className="flex items-center gap-4 group">
-               <Laptop className="w-10 h-10 text-amber-500 group-hover:scale-110 transition-transform" />
-               <div>
-                  <p className="font-heading font-bold text-foreground">Responsive Design</p>
-                  <p className="text-muted-foreground text-sm">Flawless UI on every device</p>
+               <div className="flex items-center gap-4 group cursor-default">
+                 <Laptop className="w-10 h-10 text-amber-500 group-hover:scale-110 transition-transform" />
+                 <div>
+                    <p className="font-heading font-bold text-foreground">Responsive Design</p>
+                    <p className="text-muted-foreground text-sm">Flawless UI on every device</p>
+                 </div>
                </div>
-             </div>
-          </motion.div>
+            </div>
+          </Reveal>
         </div>
     </section>
   );

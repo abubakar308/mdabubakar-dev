@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { GraduationCap, MapPin, Calendar, BookOpen } from "lucide-react";
+import { GraduationCap, Calendar, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Reveal from "@/components/common/Reveal";
 
 const educations = [
   {
@@ -42,45 +42,35 @@ export default function Experience() {
 
       <div className="max-w-7xl mx-auto space-y-16">
         {/* Header */}
-        <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.6 }}
-           viewport={{ once: true }}
-           className="text-center space-y-4 max-w-3xl mx-auto"
-        >
-          <div className="inline-flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-sm mb-2">
-            <span className="h-0.5 w-10 bg-accent-brand" />
-            My Journey
-            <span className="h-0.5 w-10 bg-accent-brand" />
+        <Reveal width="100%">
+          <div className="text-center space-y-4 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-sm mb-2">
+              <span className="h-0.5 w-10 bg-accent-brand" />
+              My Journey
+              <span className="h-0.5 w-10 bg-accent-brand" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground">
+               Education & <span className="text-accent-brand">Experience</span>
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground">
-             Education & <span className="text-accent-brand">Experience</span>
-          </h2>
-
-
-        </motion.div>
+        </Reveal>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Education Column */}
           <div className="space-y-8">
-            <div className="flex items-center gap-4 mb-8">
-               <div className="p-3 bg-accent-brand/10 text-accent-brand rounded-xl">
-                 <GraduationCap className="w-8 h-8" />
-               </div>
+            <Reveal horizontal>
+              <div className="flex items-center gap-4 mb-8">
+                 <div className="p-3 bg-accent-brand/10 text-accent-brand rounded-xl">
+                   <GraduationCap className="w-8 h-8" />
+                 </div>
 
-               <h3 className="text-2xl font-heading font-bold text-foreground uppercase tracking-wider">Education</h3>
-            </div>
+                 <h3 className="text-2xl font-heading font-bold text-foreground uppercase tracking-wider">Education</h3>
+              </div>
+            </Reveal>
 
             {educations.map((edu, idx) => (
-              <motion.div
-                 key={edu.degree}
-                 initial={{ opacity: 0, x: -30 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                 viewport={{ once: true }}
-              >
-                <Card className="border-2 border-border/40 shadow-sm bg-card relative overflow-hidden group">
+              <Reveal key={edu.degree} horizontal delay={0.2 + idx * 0.1} width="100%">
+                <Card className="border-2 border-border/40 shadow-sm bg-card relative overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                    <div className="absolute top-0 left-0 w-1.5 h-full bg-accent-brand scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300" />
 
                    <CardContent className="p-8 space-y-4">
@@ -102,28 +92,24 @@ export default function Experience() {
 
                    </CardContent>
                 </Card>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
 
           {/* Experience Column */}
           <div className="space-y-8">
-            <div className="flex items-center gap-4 mb-8">
-               <div className="p-3 bg-green-vibrant/10 text-green-vibrant rounded-xl">
-                 <BookOpen className="w-8 h-8" />
-               </div>
-               <h3 className="text-2xl font-heading font-bold text-foreground uppercase tracking-wider">Experience & Growth</h3>
-            </div>
+            <Reveal horizontal delay={0.3}>
+              <div className="flex items-center gap-4 mb-8">
+                 <div className="p-3 bg-green-vibrant/10 text-green-vibrant rounded-xl">
+                   <BookOpen className="w-8 h-8" />
+                 </div>
+                 <h3 className="text-2xl font-heading font-bold text-foreground uppercase tracking-wider">Experience & Growth</h3>
+              </div>
+            </Reveal>
 
             {experiences.map((exp, idx) => (
-              <motion.div
-                 key={exp.title}
-                 initial={{ opacity: 0, x: 30 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                 viewport={{ once: true }}
-              >
-                <Card className="border-2 border-border/40 shadow-sm bg-card relative overflow-hidden group">
+              <Reveal key={exp.title} horizontal delay={0.4 + idx * 0.1} width="100%">
+                <Card className="border-2 border-border/40 shadow-sm bg-card relative overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                    <div className="absolute top-0 left-0 w-1.5 h-full bg-green-vibrant scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300" />
 
                    <CardContent className="p-8 space-y-4">
@@ -144,7 +130,7 @@ export default function Experience() {
 
                    </CardContent>
                 </Card>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </div>

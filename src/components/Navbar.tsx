@@ -2,17 +2,18 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, FileText } from "lucide-react";
+import { Menu, FileText, X, Github, Linkedin, Facebook, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
+  DrawerClose,
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/common/ThemeToggle";
+import Magnetic from "@/components/common/Magnetic";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -21,6 +22,13 @@ const navLinks = [
   { name: "Projects", href: "#projects" },
   { name: "Education", href: "#education" },
   { name: "Contact", href: "#contact" },
+];
+
+const socialLinks = [
+  { name: "GitHub", href: "https://github.com/mdabubakarsiddique", icon: Github },
+  { name: "LinkedIn", href: "https://linkedin.com/in/mdabubakarsiddique", icon: Linkedin },
+  { name: "Facebook", href: "https://facebook.com/mdabubakarsiddique", icon: Facebook },
+  { name: "Email", href: "mailto:abubakar@example.com", icon: Mail },
 ];
 
 export default function Navbar() {
@@ -52,77 +60,130 @@ export default function Navbar() {
   return (
     <header className={navClasses}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link
-          href="/"
-          className={cn(
-            "text-xl font-heading font-bold tracking-tighter",
-            textClasses
-          )}
-        >
-          MD ABU BAKAR SIDDIQUE
-        </Link>
+        <Magnetic>
+          <Link
+            href="/"
+            className={cn(
+              "text-xl font-heading font-bold tracking-tighter hover:text-accent-brand transition-colors",
+              textClasses
+            )}
+          >
+            MD ABU BAKAR SIDDIQUE
+          </Link>
+        </Magnetic>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <motion.div
               key={link.name}
-              href={link.href}
-              className={cn(
-                "text-sm font-bold uppercase tracking-widest hover:text-accent-brand transition-colors",
-                textClasses
-              )}
-
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {link.name}
-            </Link>
+              <Link
+                href={link.href}
+                className={cn(
+                  "text-sm font-bold uppercase tracking-widest hover:text-accent-brand transition-colors",
+                  textClasses
+                )}
+              >
+                {link.name}
+              </Link>
+            </motion.div>
           ))}
-          <Button
-            variant="outline"
-            className="border-accent-brand text-accent-brand hover:bg-accent-brand hover:text-primary-foreground rounded-full px-6 font-bold shadow-sm"
-          >
-            <FileText className="w-4 h-4 mr-2" />
-            Resume
-          </Button>
+          <Magnetic>
+            <Button
+              variant="outline"
+              className="border-accent-brand text-accent-brand hover:bg-accent-brand hover:text-primary-foreground rounded-full px-6 font-bold shadow-sm hover:scale-105 active:scale-95 transition-transform"
+            >
+              <FileText className="w-4 h-4 mr-2" />
+              Resume
+            </Button>
+          </Magnetic>
 
-          <ThemeToggle />
+          <Magnetic>
+            <ThemeToggle />
+          </Magnetic>
         </nav>
 
         {/* Mobile Nav Trigger */}
         <div className="md:hidden flex items-center gap-4">
-          <ThemeToggle />
-          <Drawer open={isOpen} onOpenChange={setIsOpen}>
+          <Magnetic>
+            <ThemeToggle />
+          </Magnetic>
+          <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right">
             <DrawerTrigger asChild>
               <Button variant="ghost" size="icon" className={textClasses}>
                 <Menu className="w-6 h-6" />
               </Button>
             </DrawerTrigger>
-            <DrawerContent className="bg-card border-border text-foreground">
+            <DrawerContent className="bg-background/95 backdrop-blur-xl border-l border-border h-full max-w-[320px] w-[80%] rounded-l-[1.5rem] p-0 shadow-2xl">
+              <div className="flex flex-col h-full overflow-y-auto">
+                {/* Header */}
+                <div className="p-6 pb-4 flex items-center justify-between">
+                  <div className="text-sm font-heading font-extrabold tracking-tighter text-foreground/40 uppercase">
+                    Portfolio
+                  </div>
+                  <DrawerClose asChild>
+                     <Button variant="ghost" size="icon" className="rounded-full hover:bg-accent-brand/10 hover:text-accent-brand transition-colors">
+                        <X className="w-5 h-5" />
+                     </Button>
+                  </DrawerClose>
+                </div>
 
-              <DrawerHeader>
-                <DrawerTitle className="text-center font-heading">
-                  Navigation
-                </DrawerTitle>
-              </DrawerHeader>
-              <div className="flex flex-col items-center gap-6 py-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-lg font-bold uppercase tracking-widest hover:text-accent-brand transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                <Button
-                  variant="outline"
-                  className="w-40 border-accent-brand text-accent-brand hover:bg-accent-brand hover:text-primary-foreground rounded-full mt-4 font-bold shadow-md"
-                >
-                  <FileText className="w-4 h-4 mr-2" />
-                  Resume
-                </Button>
+                <div className="px-6 py-2">
+                   <h2 className="text-xl font-heading font-extrabold text-foreground pb-4 border-b border-border/50">Navigation</h2>
+                </div>
 
+                {/* Main Links */}
+                <nav className="flex-1 px-4 py-4 flex flex-col gap-1">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="group flex items-center justify-between p-4 rounded-2xl hover:bg-accent-brand/5 text-base font-bold uppercase tracking-widest text-foreground/80 hover:text-accent-brand transition-all"
+                    >
+                      {link.name}
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent-brand scale-0 group-hover:scale-100 transition-transform" />
+                    </Link>
+                  ))}
+                </nav>
+
+                {/* Footer Section */}
+                <div className="p-6 pt-0 mt-auto space-y-8">
+                   <div className="space-y-4">
+                      <Button
+                        variant="outline"
+                        className="w-full border-accent-brand text-accent-brand hover:bg-accent-brand hover:text-white rounded-2xl h-14 font-bold shadow-md hover:scale-[1.02] active:scale-95 transition-all text-sm uppercase tracking-widest"
+                      >
+                        <FileText className="w-4 h-4 mr-2" />
+                        Download Resume
+                      </Button>
+                   </div>
+
+                   <div className="space-y-4">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 pl-1">Keep in Touch</p>
+                      <div className="flex gap-3">
+                         {socialLinks.map((social) => (
+                            <Link
+                               key={social.name}
+                               href={social.href}
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               className="p-3 bg-secondary/10 hover:bg-accent-brand/10 text-foreground/60 hover:text-accent-brand hover:shadow-lg transition-all rounded-xl"
+                               title={social.name}
+                            >
+                               <social.icon className="w-4 h-4" />
+                            </Link>
+                         ))}
+                      </div>
+                   </div>
+
+                   <div className="pt-4 text-center">
+                       <p className="text-[10px] font-medium text-foreground/30">© {new Date().getFullYear()} Md Abu Bakar Siddique</p>
+                   </div>
+                </div>
               </div>
             </DrawerContent>
           </Drawer>
