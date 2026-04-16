@@ -25,17 +25,18 @@ export const projects: Project[] = [
     ],
     image: "/images/projects/TutorByte online tutoring platform homepage.png",
     description:
-      "A full-featured online tutor booking platform where students can find tutors, book sessions, manage availability, and leave reviews with secure authentication.",
+      "A full-featured online tutor booking platform where students find and book tutors, manage sessions, and leave reviews — backed by secure role-based authentication.",
     liveLink: "https://tutorbyte.vercel.app/",
     github_client: "https://github.com/abubakar308/TutorByte-Frontend",
     github_server: "https://github.com/abubakar308/TutorByte-Backend",
-    challenges: [
-      "Implemented role-based auth (student, tutor, admin) with protected routes.",
-      "Designed conflict-free time-slot booking logic with transactional safety.",
-    ],
     highlights: [
-      "End-to-end tutor discovery, booking, and review workflow.",
-      "Availability management dashboard for tutors.",
+      "End-to-end tutor discovery, session booking, and review workflow.",
+      "Availability management dashboard for tutors with conflict-free scheduling.",
+      "Role-based access control with separate dashboards for students, tutors, and admins.",
+    ],
+    challenges: [
+      "Implemented role-based auth (student, tutor, admin) with protected routes using Better Auth and middleware guards.",
+      "Designed a conflict-free time-slot booking engine with transactional safety using Prisma transactions.",
     ],
   },
   {
@@ -52,17 +53,18 @@ export const projects: Project[] = [
     ],
     image: "/images/projects/FoodHub homepage with vibrant food display.png",
     description:
-      "A multi-vendor meal ordering platform where users can browse meals, place orders, and track delivery while providers manage menus and orders through a dashboard.",
+      "A multi-vendor meal ordering platform where users browse meals, place orders, and track delivery while providers manage menus and orders through a dedicated dashboard.",
     liveLink: "https://foodhub-client-six.vercel.app/",
     github_client: "https://github.com/abubakar308/FoodHub-Client",
     github_server: "https://github.com/abubakar308/FoodHub-server",
-    challenges: [
-      "Modeled multi-vendor order lifecycle and provider-user relations in Prisma.",
-      "Secured API access with JWT and role-aware authorization.",
-    ],
     highlights: [
-      "Vendor dashboard for menu and order management.",
-      "Real-time order progress tracking for customers.",
+      "Vendor dashboard for full menu, pricing, and order management.",
+      "Real-time order progress tracking for customers from placement to delivery.",
+      "AI-powered search suggestions for meals, categories, and providers.",
+    ],
+    challenges: [
+      "Modeled a complex multi-vendor order lifecycle with provider-user relations in Prisma schemas.",
+      "Secured all API routes with JWT and role-aware authorization middleware.",
     ],
   },
   {
@@ -78,20 +80,20 @@ export const projects: Project[] = [
     ],
     image: "/images/projects/Certificate management dashboard overview.png",
     description:
-      "A secure, role-based academic portal designed to automate certificate request workflows and approval processes for students and faculty.",
-    liveLink:
-      "https://certificate-management-system-front.vercel.app/",
+      "A secure, role-based academic portal that automates certificate request workflows and multi-level approval processes for students and faculty.",
+    liveLink: "https://certificate-management-system-front.vercel.app/",
     github_client:
       "https://github.com/City-University-BD/certificate-management-system-front-end",
     github_server:
       "https://github.com/City-University-BD/certificate-management-system-back-end",
-    challenges: [
-      "Built a multi-level approval workflow across admin and faculty roles.",
-      "Ensured consistent certificate state transitions with validation checks.",
-    ],
     highlights: [
-      "Automated certificate request and approval pipeline.",
-      "Role-based access controls for secure operations.",
+      "Automated certificate request and multi-level approval pipeline.",
+      "Role-based access controls for students, faculty, and admins.",
+      "Status tracking for every request stage from submission to issuance.",
+    ],
+    challenges: [
+      "Built a multi-level approval workflow that routes requests across admin and faculty roles in the correct sequence.",
+      "Ensured consistent certificate state transitions with server-side validation to prevent invalid state changes.",
     ],
   },
   {
@@ -105,17 +107,18 @@ export const projects: Project[] = [
     ],
     image: "/images/projects/Medicine delivery app interface design.png",
     description:
-      "A medical e-commerce platform with secure payment integration, inventory tracking, and real-time order management.",
+      "A medical e-commerce platform with secure payment integration, live inventory tracking, and real-time order management for buyers and sellers.",
     liveLink: "https://medivendor-2b953.web.app/",
     github_client: "https://github.com/abubakar308/medivendor-client",
     github_server: "https://github.com/abubakar308/medivendor-server",
-    challenges: [
-      "Implemented inventory synchronization to keep stock states accurate.",
-      "Optimized query-based filtering for large medicine catalogs.",
-    ],
     highlights: [
-      "Secure checkout and payment-ready purchase flow.",
-      "Admin controls for product and order operations.",
+      "Secure checkout with payment-ready purchase flow.",
+      "Admin controls for product listing, inventory, and order operations.",
+      "Query-based medicine filtering by category, brand, and price range.",
+    ],
+    challenges: [
+      "Implemented real-time inventory synchronization to keep stock states accurate across concurrent purchases.",
+      "Optimized query-based filtering with indexed fields to handle large medicine catalogs efficiently.",
     ],
   },
   {
@@ -130,19 +133,18 @@ export const projects: Project[] = [
       "Firebase",
     ],
     description:
-      "A tutor booking platform allowing users to explore tutors, book sessions, and manage learning progress with authentication.",
+      "A tutor booking platform allowing students to explore tutors, book sessions, and manage their learning progress with Firebase-backed authentication.",
     liveLink: "https://online-tutor-booking-pla-5a98e.web.app",
-    github_client:
-      "https://github.com/abubakar308/learn-together-client",
-    github_server:
-      "https://github.com/abubakar308/learn-together-server",
-    challenges: [
-      "Protected booking routes with authentication-aware guards.",
-      "Handled session-based tutor booking and schedule validation.",
-    ],
+    github_client: "https://github.com/abubakar308/learn-together-client",
+    github_server: "https://github.com/abubakar308/learn-together-server",
     highlights: [
-      "Tutor browsing with streamlined booking journey.",
-      "Student-friendly flow for session and progress management.",
+      "Tutor browsing with a streamlined, multi-step booking journey.",
+      "Student-friendly flow for session scheduling and progress management.",
+      "Secure authentication and auth-protected booking routes.",
+    ],
+    challenges: [
+      "Protected booking routes with authentication-aware guards to prevent unauthenticated session bookings.",
+      "Handled session-based tutor booking with schedule validation to avoid double-bookings.",
     ],
   },
   {
@@ -158,19 +160,18 @@ export const projects: Project[] = [
       "Firebase",
     ],
     description:
-      "A sports equipment marketplace with authentication, category filtering, and optimized checkout experience.",
+      "A sports equipment marketplace with Firebase authentication, category filtering, cart management, and an optimized checkout experience.",
     liveLink: "https://sport-equipment-online-store.web.app",
-    github_client:
-      "https://github.com/abubakar308/AllStar-Equipment-client",
-    github_server:
-      "https://github.com/abubakar308/AllStar-Equipment-server",
-    challenges: [
-      "Stabilized cart state across refresh and auth changes.",
-      "Maintained consistent filtering and checkout behavior across devices.",
-    ],
+    github_client: "https://github.com/abubakar308/AllStar-Equipment-client",
+    github_server: "https://github.com/abubakar308/AllStar-Equipment-server",
     highlights: [
-      "Category-based shopping with responsive UX.",
-      "Authentication-enabled personalized user flow.",
+      "Category-based product browsing with a responsive and intuitive UX.",
+      "Authentication-enabled personalized cart and wishlist management.",
+      "Consistent filtering and checkout behavior across all device sizes.",
+    ],
+    challenges: [
+      "Stabilized cart state persistence across page refreshes and auth state changes.",
+      "Maintained consistent category filtering and checkout behavior across desktop and mobile viewports.",
     ],
   },
   {
@@ -185,18 +186,18 @@ export const projects: Project[] = [
       "Context API",
     ],
     description:
-      "A platform for career growth offering resume tools, interview preparation, and coaching session booking.",
+      "A platform for career growth offering resume tools, interview preparation resources, and coaching session booking — all in one place.",
     liveLink: "https://career-advice-3eaf3.firebaseapp.com/",
-    github_client:
-      "https://github.com/abubakar308/career-addvice",
+    github_client: "https://github.com/abubakar308/career-addvice",
     github_server: "#",
-    challenges: [
-      "Managed shared booking and user state across route transitions.",
-      "Integrated auth-protected actions with client-side route guards.",
-    ],
     highlights: [
-      "Career resources for resume, interview, and coaching.",
-      "Simple booking experience with clear call-to-actions.",
+      "Career resources covering resume building, interview prep, and coaching.",
+      "Simple, clear booking experience with prominent call-to-actions.",
+      "Auth-protected advisors and coaching sessions using Firebase Auth.",
+    ],
+    challenges: [
+      "Managed shared booking and user state across multiple route transitions using React Context API.",
+      "Integrated auth-protected actions with client-side route guards for coaching bookings.",
     ],
   },
 ];

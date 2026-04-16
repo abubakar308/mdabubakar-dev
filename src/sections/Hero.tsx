@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useMotionTemplate, useScroll, useSpring, useTransform } from "framer-motion";
-import { GithubIcon as Github, LinkedinIcon as Linkedin, Facebook, Mail, ArrowRight } from "lucide-react";
+import { GithubIcon as Github, LinkedinIcon as Linkedin, Facebook, Mail, ArrowRight, FolderGit2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
@@ -79,46 +79,61 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="space-y-8"
         >
-          <div className="space-y-4">
+          <div className="space-y-5">
             <Badge variant="outline" className="text-accent-brand border-accent-brand/30 bg-accent-brand/5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
-              Available for Opportunities
+              ✦ Available for Full-Stack Opportunities
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-heading font-extrabold text-foreground leading-[1.1] tracking-tighter">
-              Hi, I&apos;m <br />
-              <span className="text-accent-brand">Md Abu Bakar Siddique</span>
+
+            <h1 className="text-5xl md:text-6xl font-heading font-extrabold text-foreground leading-[1.08] tracking-tighter">
+              Full Stack
+              <br />
+              <span className="text-accent-brand">Developer</span>
             </h1>
-            <p className="text-xl md:text-2xl font-semibold text-text-body font-heading">
-              Full Stack Developer | Next.js | TypeScript | Prisma
+
+            <p className="text-lg md:text-xl font-semibold text-foreground/80 font-heading">
+              Md Abu Bakar Siddique
             </p>
 
-            <p className="text-text-body max-w-xl text-lg leading-relaxed">
-              I specialize in building exceptionally high-performance, modern, and scalable full-stack web applications with advanced UI/UX and robust backends.
+            <p className="text-text-body max-w-lg text-base md:text-lg leading-relaxed border-l-2 border-accent-brand/40 pl-4 italic">
+              Building scalable, real-world applications with modern technologies.
             </p>
 
           </div>
 
-          <div className="flex flex-wrap gap-4">
-            <Magnetic strength={0.3}>
-              <a
-                href="/Full Stack_Developer_Resume_of_Abu Bakar Siddiquel.pdf"
-                download="Full Stack_Developer_Resume_of_Abu Bakar Siddiquel.pdf"
-                className="gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:bg-indigo-700 transition-all shadow-md hover:shadow-indigo-100 inline-flex items-center justify-center"
+          <div className="flex flex-wrap gap-3">
+            {/* Primary CTA */}
+            <a href="#projects">
+              <Button
+                size="lg"
+                className="bg-accent-brand text-white hover:bg-accent-brand/90 rounded-full px-7 h-12 text-sm font-bold shadow-lg shadow-accent-brand/25 hover:shadow-accent-brand/40 transition-all hover:scale-105 active:scale-95"
               >
-                Download Resume
-              </a>
-            </Magnetic>
+                <FolderGit2 className="w-4 h-4 mr-2" />
+                View Projects
+              </Button>
+            </a>
+
+            {/* Secondary CTA */}
             <a href="#contact">
               <Button
                 size="lg"
                 variant="outline"
-                className="border-border text-foreground hover:bg-card rounded-full px-8 h-14 text-base font-bold shadow-sm transition-all hover:scale-105 hover:shadow-lg active:scale-95"
+                className="border-border text-foreground hover:bg-card hover:border-accent-brand/50 hover:text-accent-brand rounded-full px-7 h-12 text-sm font-bold shadow-sm transition-all hover:scale-105 active:scale-95"
               >
-                Get in Touch
-                <ArrowRight className="w-5 h-5 ml-2" />
+                Contact Me
+                <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </a>
 
-
+            {/* Resume */}
+            <Magnetic strength={0.3}>
+              <a
+                href="/Full Stack_Developer_Resume_of_Abu Bakar Siddiquel.pdf"
+                download="Full Stack_Developer_Resume_of_Abu Bakar Siddiquel.pdf"
+                className="gap-2 bg-transparent text-text-body border border-border px-5 h-12 rounded-full font-bold text-sm hover:text-foreground hover:border-foreground/40 transition-all inline-flex items-center justify-center hover:scale-105 active:scale-95"
+              >
+                Resume ↓
+              </a>
+            </Magnetic>
           </div>
 
           <div className="flex gap-6 items-center">

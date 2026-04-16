@@ -25,7 +25,7 @@ export default function Contact() {
             </h2>
 
             <p className="text-lg text-text-body/80 max-w-xl mx-auto leading-relaxed">
-              I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+              I&apos;m open to <strong className="text-foreground">full-stack opportunities and collaborations</strong> — let&apos;s build something meaningful together.
             </p>
           </div>
         </Reveal>
@@ -76,14 +76,18 @@ export default function Contact() {
                     <div className="h-0.5 flex-1 bg-border" />
                  </h4>
                   <div className="flex gap-4">
-                     <Button variant="outline" className="flex-1 rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all duration-300 font-bold group shadow-sm hover:scale-105 hover:shadow-lg active:scale-95">
-                        <Linkedin className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                        LinkedIn
-                     </Button>
-                     <Button variant="outline" className="flex-1 rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all duration-300 font-bold group shadow-sm hover:scale-105 hover:shadow-lg active:scale-95">
-                        <Facebook className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                        Facebook
-                     </Button>
+                     <a href="https://www.linkedin.com/in/abubakar308/" target="_blank" rel="noopener noreferrer" className="flex-1">
+                       <Button variant="outline" className="w-full rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all duration-300 font-bold group shadow-sm hover:scale-105 hover:shadow-lg active:scale-95">
+                          <Linkedin className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
+                          LinkedIn
+                       </Button>
+                     </a>
+                     <a href="https://www.facebook.com/mdabubakar308" target="_blank" rel="noopener noreferrer" className="flex-1">
+                       <Button variant="outline" className="w-full rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all duration-300 font-bold group shadow-sm hover:scale-105 hover:shadow-lg active:scale-95">
+                          <Facebook className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
+                          Facebook
+                       </Button>
+                     </a>
                   </div>
               </div>
             </div>
