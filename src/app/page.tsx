@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Sections Wrapper */}
       <div className="flex flex-col">
         <Hero />

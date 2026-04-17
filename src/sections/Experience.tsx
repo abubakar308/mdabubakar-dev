@@ -39,9 +39,9 @@ const experienceItems = [
 
 export default function Experience() {
   return (
-    <section id="education" className="py-24 md:py-32 bg-background overflow-hidden">
+    <section id="education" className="py-12 md:py-16 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 space-y-20">
-        
+
         {/* Header */}
         <Reveal>
           <div className="space-y-4 max-w-3xl">

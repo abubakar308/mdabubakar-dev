@@ -37,8 +37,8 @@ export default function Navbar() {
   const navClasses = cn(
     "fixed left-0 right-0 top-0 z-50 transition-all duration-500",
     scrolled
-      ? "py-3 bg-background/90 backdrop-blur-2xl border-b border-border/70 shadow-[0_8px_30px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
-      : "py-5 bg-background/0 border-b border-transparent"
+      ? "py-2 bg-background/90 backdrop-blur-2xl border-b border-border/70 shadow-[0_8px_30px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
+      : "py-4 bg-background/0 border-b border-transparent"
   );
 
   return (

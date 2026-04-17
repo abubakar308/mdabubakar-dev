@@ -11,27 +11,27 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="py-16 bg-background border-t border-border/40">
+    <footer className="py-12 bg-background border-t border-border/40">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-        <div className="flex flex-col items-center justify-center space-y-10">
-          
+        <div className="flex flex-col items-center justify-center space-y-6">
+
           {/* Brand/Identity */}
           <div className="text-center space-y-4">
-             <div className="inline-flex items-center gap-3 mb-2 translate-x-3">
-                <div className="bg-teal-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center text-xs shadow-xl shadow-teal-500/20">
-                  AB
-                </div>
-                <span className="text-lg font-heading font-extrabold text-foreground tracking-tight">Abu Bakar</span>
-             </div>
-             
-             <div className="space-y-1">
-               <p className="text-[10px] font-extrabold uppercase tracking-[0.3em] text-accent-brand">
-                 Full Stack Developer
-               </p>
-               <p className="text-sm font-medium text-text-body/60 max-w-sm mx-auto leading-relaxed">
-                 Engineering scalable, production-ready applications with modern technology and clean architecture.
-               </p>
-             </div>
+            <div className="inline-flex items-center gap-3 mb-2 translate-x-3">
+              <div className="bg-teal-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center text-xs shadow-xl shadow-teal-500/20">
+                AB
+              </div>
+              <span className="text-lg font-heading font-extrabold text-foreground tracking-tight">Abu Bakar</span>
+            </div>
+
+            <div className="space-y-1">
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.3em] text-accent-brand">
+                Full Stack Developer
+              </p>
+              <p className="text-sm font-medium text-text-body/60 max-w-sm mx-auto leading-relaxed">
+                Engineering scalable, production-ready applications with modern technology and clean architecture.
+              </p>
+            </div>
           </div>
 
           {/* Social Links */}
@@ -57,11 +57,11 @@ export default function Footer() {
                 © {new Date().getFullYear()} Md Abu Bakar Siddique
               </p>
               <div className="flex items-center gap-3">
-                 <div className="h-px w-8 bg-border/20" />
-                 <p className="text-[9px] font-bold text-foreground/15 uppercase tracking-widest">
-                   Built with Precision & Passion
-                 </p>
-                 <div className="h-px w-8 bg-border/20" />
+                <div className="h-px w-8 bg-border/20" />
+                <p className="text-[9px] font-bold text-foreground/15 uppercase tracking-widest">
+                  Built with Precision & Passion
+                </p>
+                <div className="h-px w-8 bg-border/20" />
               </div>
             </div>
           </div>

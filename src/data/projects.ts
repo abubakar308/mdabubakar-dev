@@ -42,7 +42,7 @@ export const projects: Project[] = [
     keyFeatures: ["Role-based Auth", "Slot Booking", "Tutor Reviews"],
   },
   {
-    name: "FoodHub",
+    name: "QuickPlatter",
     stack: [
       "Next.js",
       "TypeScript",

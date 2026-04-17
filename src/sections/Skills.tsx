@@ -87,13 +87,13 @@ const skillCategories: SkillCategory[] = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative overflow-hidden bg-background py-24 md:py-32">
+    <section id="skills" className="relative overflow-hidden bg-background py-12 md:py-16">
       {/* Subtle Background Glows */}
       <div className="absolute left-[10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-accent-brand/[0.03] blur-[120px] pointer-events-none" />
       <div className="absolute right-[10%] bottom-[-10%] h-[500px] w-[500px] rounded-full bg-blue-500/[0.03] blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-        
+
         {/* Header */}
         <Reveal width="100%">
           <div className="space-y-4 max-w-3xl mb-24">
@@ -106,14 +106,14 @@ export default function Skills() {
               <span className="text-accent-brand">Modern Tech</span>
             </h2>
             <p className="text-text-body/70 text-base sm:text-lg leading-relaxed max-w-2xl font-medium">
-              A recruiter-friendly overview of my core competencies, organized by 
+              A recruiter-friendly overview of my core competencies, organized by
               specialization for efficient review and technical assessment.
             </p>
           </div>
         </Reveal>
 
         {/* Categories Grid */}
-        <div className="grid gap-16 md:gap-20">
+        <div className="grid gap-12 md:gap-16">
           {skillCategories.map((category, catIndex) => (
             <div key={category.title} className="space-y-8">
               <Reveal delay={catIndex * 0.05}>
@@ -127,16 +127,16 @@ export default function Skills() {
 
               <div className="flex flex-wrap gap-4 sm:gap-6">
                 {category.skills.map((skill, index) => (
-                  <Reveal 
-                    key={skill.name} 
+                  <Reveal
+                    key={skill.name}
                     delay={catIndex * 0.05 + index * 0.02}
                     horizontal
                     className="h-full"
                   >
                     <div className={`
                       group relative overflow-hidden flex items-center gap-3.5 px-6 py-3.5 rounded-2xl border transition-all duration-500
-                      ${skill.highlight 
-                        ? "bg-accent-brand/[0.08] border-accent-brand/40 shadow-lg shadow-accent-brand/5 scale-[1.05]" 
+                      ${skill.highlight
+                        ? "bg-accent-brand/[0.08] border-accent-brand/40 shadow-lg shadow-accent-brand/5 scale-[1.05]"
                         : "bg-card/40 border-border/50 hover:border-accent-brand/30 hover:bg-card hover:-translate-y-1 hover:shadow-xl hover:shadow-accent-brand/5"
                       }
                     `}>

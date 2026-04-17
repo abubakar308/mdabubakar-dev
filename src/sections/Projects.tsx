@@ -17,12 +17,12 @@ export default function Projects() {
   }, [currentPage]);
 
   return (
-    <section id="projects" className="py-20 md:py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section id="projects" className="py-12 md:py-16 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
 
         {/* Header */}
         <Reveal>
-          <div className="space-y-3 max-w-2xl">
+          <div className="space-y-2 max-w-2xl">
             <div className="flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-xs sm:text-sm">
               <span className="h-0.5 w-8 bg-accent-brand" />
               My Portfolio
@@ -39,7 +39,7 @@ export default function Projects() {
         </Reveal>
 
         {/* Projects Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {paginatedProjects.map((project, idx) => (
             <ProjectCard key={project.name} project={project} index={idx} />
           ))}
@@ -47,7 +47,7 @@ export default function Projects() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-3 pt-2">
+          <div className="flex items-center justify-center gap-2 pt-2">
             <Button
               variant="outline"
               size="sm"

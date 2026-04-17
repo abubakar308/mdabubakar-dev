@@ -60,7 +60,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center bg-background overflow-hidden selection:bg-accent-brand/30 pt-24 md:pt-32"
+      className="relative min-h-screen flex items-center bg-background overflow-hidden selection:bg-accent-brand/30 sm:pt-12 md:pt-20 lg:pt-24"
     >
       {/* Background Interactive Glow */}
       <motion.div

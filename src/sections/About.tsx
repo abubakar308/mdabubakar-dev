@@ -43,8 +43,8 @@ const quickFacts = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 md:py-32 bg-section overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 space-y-20">
+    <section id="about" className="py-16 md:py-24 bg-section overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 space-y-16">
 
         {/* Header */}
         <Reveal>
@@ -58,8 +58,8 @@ export default function About() {
               <span className="text-accent-brand">Solutions</span>
             </h2>
             <p className="text-text-body text-base sm:text-lg leading-relaxed max-w-2xl">
-              I am a results-driven developer who thrives on turning complex problems 
-              into seamless digital experiences. My focus is on writing clean, 
+              I am a results-driven developer who thrives on turning complex problems
+              into seamless digital experiences. My focus is on writing clean,
               maintainable code that delivers real business value.
             </p>
           </div>
@@ -111,7 +111,7 @@ export default function About() {
               <div className="absolute top-0 right-0 p-10 opacity-[0.03] rotate-12 transition-transform duration-700 group-hover:scale-110">
                 <Sparkles className="w-32 h-32 text-accent-brand" />
               </div>
-              
+
               <div className="relative z-10 space-y-6">
                 <p className="text-xl sm:text-2xl font-medium text-foreground leading-relaxed italic">
                   &quot;Software engineering is the art of solving human problems through elegant, scalable technology.&quot;
@@ -135,7 +135,7 @@ export default function About() {
                   Open for <br />Opportunities
                 </p>
               </div>
-              
+
               <a href="#projects" className="relative z-10 w-fit">
                 <Button
                   size="lg"
