@@ -26,7 +26,11 @@ const socialLinks = [
   { name: "GitHub", href: "https://github.com/abubakar308", icon: Github },
   { name: "LinkedIn", href: "https://www.linkedin.com/in/abubakar308/", icon: Linkedin },
   { name: "Facebook", href: "https://www.facebook.com/mdabubakar308", icon: Facebook },
-  { name: "Email", href: "https://mail.google.com/mail/?view=cm&fs=1&to=mdabubakar.dev@gmail.com&su=New%20Project%20Inquiry%20%7C%20Portfolio", icon: Mail },
+  {
+    name: "Email",
+    href: "mailto:mdabubakar.dev@gmail.com?subject=Portfolio%20Inquiry",
+    icon: Mail,
+  },
 ];
 
 export default function Hero() {
@@ -159,16 +163,16 @@ export default function Hero() {
               <span className="text-[10px] font-extrabold uppercase tracking-widest text-foreground/20 mr-2">Connect</span>
               {socialLinks.map((social) => (
                 <motion.a
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social.name}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                   className="p-2.5 bg-card/50 border border-border/50 rounded-xl text-text-body/60 hover:text-accent-brand hover:border-accent-brand/30 hover:shadow-lg transition-all"
-                  title={social.name}
                 >
-                  <social.icon className="w-4 h-4" />
+                  <social.icon className="w-4 h-4" aria-hidden="true" />
                 </motion.a>
               ))}
             </div>
@@ -202,14 +206,11 @@ export default function Hero() {
               <div className="relative w-[88%] h-[88%] rounded-[2rem] overflow-hidden border-2 border-border bg-card shadow-2xl group transition-all duration-500 hover:border-accent-brand/50 hover:shadow-accent-brand/10">
                 <Image
                   src="/images/abubakar.png"
-                  alt="Md Abu Bakar Siddique"
+                  alt="Portrait of Md Abu Bakar Siddique"
                   fill
+                  sizes="(max-width: 768px) 88vw, (max-width: 1024px) 370px, 422px"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   priority
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "https://placehold.co/600x600/0F172A/06B6D4?text=Abu+Bakar";
-                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>

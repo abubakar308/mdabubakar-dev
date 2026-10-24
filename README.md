@@ -59,7 +59,7 @@ This portfolio is not just a resume; it's a demonstration of modern web engineer
    ```
 2. Navigate to the directory:
    ```bash
-   cd my-portfolio
+   cd mdabubakar-dev
    ```
 3. Install dependencies:
    ```bash
