@@ -77,9 +77,17 @@ export default function AdminAnalyticsPage() {
     }
   }
 
-  useEffect(() => {
-    void loadAnalytics();
-  }, []);
+useEffect(() => {
+  void loadAnalytics();
+
+  const interval = setInterval(() => {
+    if (document.visibilityState === "visible") {
+      void loadAnalytics();
+    }
+  }, 10_000);
+
+  return () => clearInterval(interval);
+}, []);
 
   async function handleLogout() {
     try {

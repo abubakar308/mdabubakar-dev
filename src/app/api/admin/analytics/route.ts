@@ -12,10 +12,7 @@ export async function GET() {
   if (!admin) {
     return NextResponse.json(
       { success: false, message: "Unauthorized." },
-      {
-        status: 401,
-        headers: { "Cache-Control": "no-store" },
-      },
+      { status: 401, headers: { "Cache-Control": "no-store" } },
     );
   }
 
@@ -26,6 +23,7 @@ export async function GET() {
       recentPageViews,
       topPages,
       durationStats,
+      sessions,
     ] = await Promise.all([
       prisma.pageView.count(),
 
@@ -53,6 +51,28 @@ export async function GET() {
         _avg: { durationSeconds: true },
         _sum: { durationSeconds: true },
       }),
+
+      prisma.visitor.findMany({
+        take: 50,
+        orderBy: { lastActivityAt: "desc" },
+        select: {
+          sessionId: true,
+          sessionStartedAt: true,
+          lastActivityAt: true,
+          durationSeconds: true,
+          _count: {
+            select: { pageViews: true },
+          },
+          pageViews: {
+            take: 1,
+            orderBy: { createdAt: "desc" },
+            select: {
+              path: true,
+              createdAt: true,
+            },
+          },
+        },
+      }),
     ]);
 
     return NextResponse.json(
@@ -67,15 +87,21 @@ export async function GET() {
           totalTrackedDurationSeconds:
             durationStats._sum.durationSeconds ?? 0,
         },
+        sessions: sessions.map((session) => ({
+          sessionId: session.sessionId,
+          startedAt: session.sessionStartedAt,
+          lastActivityAt: session.lastActivityAt,
+          durationSeconds: session.durationSeconds,
+          pageViewCount: session._count.pageViews,
+          lastPage: session.pageViews[0]?.path ?? "—",
+        })),
         topPages: topPages.map((page) => ({
           path: page.path,
           views: page._count.path,
         })),
         recentPageViews,
       },
-      {
-        headers: { "Cache-Control": "no-store" },
-      },
+      { headers: { "Cache-Control": "no-store" } },
     );
   } catch (error) {
     console.error("Admin analytics query failed.", error);
