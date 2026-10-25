@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import BackToTop from "@/components/common/BackToTop";
 import CursorGlow from "@/components/common/CursorGlow";
+import PageViewTracker from "@/components/analytics/PageViewTracker";
 
 
 const spaceGrotesk = Space_Grotesk({
@@ -38,6 +39,7 @@ export default function RootLayout({
     >
       <body className="antialiased">
         <CursorGlow />
+         <PageViewTracker />
         <SmoothScroll>{children}</SmoothScroll>
         <BackToTop />
       </body>

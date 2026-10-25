@@ -1,0 +1,49 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Visitor {
+  id        String   @id @default(cuid())
+  sessionId String   @unique
+  firstSeen DateTime @default(now())
+  lastSeen  DateTime @updatedAt
+  userAgent String?
+  referrer  String?
+
+  pageViews PageView[]
+  events    AnalyticsEvent[]
+}
+
+model PageView {
+  id        String   @id @default(cuid())
+  visitorId String
+  path      String
+  title     String?
+  referrer  String?
+  createdAt DateTime @default(now())
+
+  visitor Visitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+
+  @@index([visitorId, createdAt])
+  @@index([path, createdAt])
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  visitorId String
+  name      String
+  path      String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+visitor Visitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+
+  @@index([visitorId, createdAt])
+  @@index([name, createdAt])
+}
