@@ -78,7 +78,10 @@ export const VisitorScalarFieldEnum = {
   firstSeen: 'firstSeen',
   lastSeen: 'lastSeen',
   userAgent: 'userAgent',
-  referrer: 'referrer'
+  referrer: 'referrer',
+  sessionStartedAt: 'sessionStartedAt',
+  lastActivityAt: 'lastActivityAt',
+  durationSeconds: 'durationSeconds'
 } as const
 
 export type VisitorScalarFieldEnum = (typeof VisitorScalarFieldEnum)[keyof typeof VisitorScalarFieldEnum]

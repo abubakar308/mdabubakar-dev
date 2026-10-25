@@ -15,6 +15,9 @@ model Visitor {
   lastSeen  DateTime @updatedAt
   userAgent String?
   referrer  String?
+  sessionStartedAt DateTime @default(now())
+  lastActivityAt   DateTime @default(now())
+  durationSeconds  Int      @default(0)
 
   pageViews PageView[]
   events    AnalyticsEvent[]

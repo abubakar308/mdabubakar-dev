@@ -20,8 +20,18 @@ export type VisitorModel = runtime.Types.Result.DefaultSelection<Prisma.$Visitor
 
 export type AggregateVisitor = {
   _count: VisitorCountAggregateOutputType | null
+  _avg: VisitorAvgAggregateOutputType | null
+  _sum: VisitorSumAggregateOutputType | null
   _min: VisitorMinAggregateOutputType | null
   _max: VisitorMaxAggregateOutputType | null
+}
+
+export type VisitorAvgAggregateOutputType = {
+  durationSeconds: number | null
+}
+
+export type VisitorSumAggregateOutputType = {
+  durationSeconds: number | null
 }
 
 export type VisitorMinAggregateOutputType = {
@@ -31,6 +41,9 @@ export type VisitorMinAggregateOutputType = {
   lastSeen: Date | null
   userAgent: string | null
   referrer: string | null
+  sessionStartedAt: Date | null
+  lastActivityAt: Date | null
+  durationSeconds: number | null
 }
 
 export type VisitorMaxAggregateOutputType = {
@@ -40,6 +53,9 @@ export type VisitorMaxAggregateOutputType = {
   lastSeen: Date | null
   userAgent: string | null
   referrer: string | null
+  sessionStartedAt: Date | null
+  lastActivityAt: Date | null
+  durationSeconds: number | null
 }
 
 export type VisitorCountAggregateOutputType = {
@@ -49,9 +65,20 @@ export type VisitorCountAggregateOutputType = {
   lastSeen: number
   userAgent: number
   referrer: number
+  sessionStartedAt: number
+  lastActivityAt: number
+  durationSeconds: number
   _all: number
 }
 
+
+export type VisitorAvgAggregateInputType = {
+  durationSeconds?: true
+}
+
+export type VisitorSumAggregateInputType = {
+  durationSeconds?: true
+}
 
 export type VisitorMinAggregateInputType = {
   id?: true
@@ -60,6 +87,9 @@ export type VisitorMinAggregateInputType = {
   lastSeen?: true
   userAgent?: true
   referrer?: true
+  sessionStartedAt?: true
+  lastActivityAt?: true
+  durationSeconds?: true
 }
 
 export type VisitorMaxAggregateInputType = {
@@ -69,6 +99,9 @@ export type VisitorMaxAggregateInputType = {
   lastSeen?: true
   userAgent?: true
   referrer?: true
+  sessionStartedAt?: true
+  lastActivityAt?: true
+  durationSeconds?: true
 }
 
 export type VisitorCountAggregateInputType = {
@@ -78,6 +111,9 @@ export type VisitorCountAggregateInputType = {
   lastSeen?: true
   userAgent?: true
   referrer?: true
+  sessionStartedAt?: true
+  lastActivityAt?: true
+  durationSeconds?: true
   _all?: true
 }
 
@@ -119,6 +155,18 @@ export type VisitorAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: VisitorAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: VisitorSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: VisitorMinAggregateInputType
@@ -149,6 +197,8 @@ export type VisitorGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: VisitorCountAggregateInputType | true
+  _avg?: VisitorAvgAggregateInputType
+  _sum?: VisitorSumAggregateInputType
   _min?: VisitorMinAggregateInputType
   _max?: VisitorMaxAggregateInputType
 }
@@ -160,7 +210,12 @@ export type VisitorGroupByOutputType = {
   lastSeen: Date
   userAgent: string | null
   referrer: string | null
+  sessionStartedAt: Date
+  lastActivityAt: Date
+  durationSeconds: number
   _count: VisitorCountAggregateOutputType | null
+  _avg: VisitorAvgAggregateOutputType | null
+  _sum: VisitorSumAggregateOutputType | null
   _min: VisitorMinAggregateOutputType | null
   _max: VisitorMaxAggregateOutputType | null
 }
@@ -190,6 +245,9 @@ export type VisitorWhereInput = {
   lastSeen?: Prisma.DateTimeFilter<"Visitor"> | Date | string
   userAgent?: Prisma.StringNullableFilter<"Visitor"> | string | null
   referrer?: Prisma.StringNullableFilter<"Visitor"> | string | null
+  sessionStartedAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
+  lastActivityAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
+  durationSeconds?: Prisma.IntFilter<"Visitor"> | number
   pageViews?: Prisma.PageViewListRelationFilter
   events?: Prisma.AnalyticsEventListRelationFilter
 }
@@ -201,6 +259,9 @@ export type VisitorOrderByWithRelationInput = {
   lastSeen?: Prisma.SortOrder
   userAgent?: Prisma.SortOrderInput | Prisma.SortOrder
   referrer?: Prisma.SortOrderInput | Prisma.SortOrder
+  sessionStartedAt?: Prisma.SortOrder
+  lastActivityAt?: Prisma.SortOrder
+  durationSeconds?: Prisma.SortOrder
   pageViews?: Prisma.PageViewOrderByRelationAggregateInput
   events?: Prisma.AnalyticsEventOrderByRelationAggregateInput
 }
@@ -215,6 +276,9 @@ export type VisitorWhereUniqueInput = Prisma.AtLeast<{
   lastSeen?: Prisma.DateTimeFilter<"Visitor"> | Date | string
   userAgent?: Prisma.StringNullableFilter<"Visitor"> | string | null
   referrer?: Prisma.StringNullableFilter<"Visitor"> | string | null
+  sessionStartedAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
+  lastActivityAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
+  durationSeconds?: Prisma.IntFilter<"Visitor"> | number
   pageViews?: Prisma.PageViewListRelationFilter
   events?: Prisma.AnalyticsEventListRelationFilter
 }, "id" | "sessionId">
@@ -226,9 +290,14 @@ export type VisitorOrderByWithAggregationInput = {
   lastSeen?: Prisma.SortOrder
   userAgent?: Prisma.SortOrderInput | Prisma.SortOrder
   referrer?: Prisma.SortOrderInput | Prisma.SortOrder
+  sessionStartedAt?: Prisma.SortOrder
+  lastActivityAt?: Prisma.SortOrder
+  durationSeconds?: Prisma.SortOrder
   _count?: Prisma.VisitorCountOrderByAggregateInput
+  _avg?: Prisma.VisitorAvgOrderByAggregateInput
   _max?: Prisma.VisitorMaxOrderByAggregateInput
   _min?: Prisma.VisitorMinOrderByAggregateInput
+  _sum?: Prisma.VisitorSumOrderByAggregateInput
 }
 
 export type VisitorScalarWhereWithAggregatesInput = {
@@ -241,6 +310,9 @@ export type VisitorScalarWhereWithAggregatesInput = {
   lastSeen?: Prisma.DateTimeWithAggregatesFilter<"Visitor"> | Date | string
   userAgent?: Prisma.StringNullableWithAggregatesFilter<"Visitor"> | string | null
   referrer?: Prisma.StringNullableWithAggregatesFilter<"Visitor"> | string | null
+  sessionStartedAt?: Prisma.DateTimeWithAggregatesFilter<"Visitor"> | Date | string
+  lastActivityAt?: Prisma.DateTimeWithAggregatesFilter<"Visitor"> | Date | string
+  durationSeconds?: Prisma.IntWithAggregatesFilter<"Visitor"> | number
 }
 
 export type VisitorCreateInput = {
@@ -250,6 +322,9 @@ export type VisitorCreateInput = {
   lastSeen?: Date | string
   userAgent?: string | null
   referrer?: string | null
+  sessionStartedAt?: Date | string
+  lastActivityAt?: Date | string
+  durationSeconds?: number
   pageViews?: Prisma.PageViewCreateNestedManyWithoutVisitorInput
   events?: Prisma.AnalyticsEventCreateNestedManyWithoutVisitorInput
 }
@@ -261,6 +336,9 @@ export type VisitorUncheckedCreateInput = {
   lastSeen?: Date | string
   userAgent?: string | null
   referrer?: string | null
+  sessionStartedAt?: Date | string
+  lastActivityAt?: Date | string
+  durationSeconds?: number
   pageViews?: Prisma.PageViewUncheckedCreateNestedManyWithoutVisitorInput
   events?: Prisma.AnalyticsEventUncheckedCreateNestedManyWithoutVisitorInput
 }
@@ -272,6 +350,9 @@ export type VisitorUpdateInput = {
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActivityAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationSeconds?: Prisma.IntFieldUpdateOperationsInput | number
   pageViews?: Prisma.PageViewUpdateManyWithoutVisitorNestedInput
   events?: Prisma.AnalyticsEventUpdateManyWithoutVisitorNestedInput
 }
@@ -283,6 +364,9 @@ export type VisitorUncheckedUpdateInput = {
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActivityAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationSeconds?: Prisma.IntFieldUpdateOperationsInput | number
   pageViews?: Prisma.PageViewUncheckedUpdateManyWithoutVisitorNestedInput
   events?: Prisma.AnalyticsEventUncheckedUpdateManyWithoutVisitorNestedInput
 }
@@ -294,6 +378,9 @@ export type VisitorCreateManyInput = {
   lastSeen?: Date | string
   userAgent?: string | null
   referrer?: string | null
+  sessionStartedAt?: Date | string
+  lastActivityAt?: Date | string
+  durationSeconds?: number
 }
 
 export type VisitorUpdateManyMutationInput = {
@@ -303,6 +390,9 @@ export type VisitorUpdateManyMutationInput = {
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActivityAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationSeconds?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type VisitorUncheckedUpdateManyInput = {
@@ -312,6 +402,9 @@ export type VisitorUncheckedUpdateManyInput = {
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActivityAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationSeconds?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type VisitorCountOrderByAggregateInput = {
@@ -321,6 +414,13 @@ export type VisitorCountOrderByAggregateInput = {
   lastSeen?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
   referrer?: Prisma.SortOrder
+  sessionStartedAt?: Prisma.SortOrder
+  lastActivityAt?: Prisma.SortOrder
+  durationSeconds?: Prisma.SortOrder
+}
+
+export type VisitorAvgOrderByAggregateInput = {
+  durationSeconds?: Prisma.SortOrder
 }
 
 export type VisitorMaxOrderByAggregateInput = {
@@ -330,6 +430,9 @@ export type VisitorMaxOrderByAggregateInput = {
   lastSeen?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
   referrer?: Prisma.SortOrder
+  sessionStartedAt?: Prisma.SortOrder
+  lastActivityAt?: Prisma.SortOrder
+  durationSeconds?: Prisma.SortOrder
 }
 
 export type VisitorMinOrderByAggregateInput = {
@@ -339,6 +442,13 @@ export type VisitorMinOrderByAggregateInput = {
   lastSeen?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
   referrer?: Prisma.SortOrder
+  sessionStartedAt?: Prisma.SortOrder
+  lastActivityAt?: Prisma.SortOrder
+  durationSeconds?: Prisma.SortOrder
+}
+
+export type VisitorSumOrderByAggregateInput = {
+  durationSeconds?: Prisma.SortOrder
 }
 
 export type VisitorScalarRelationFilter = {
@@ -356,6 +466,14 @@ export type DateTimeFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type VisitorCreateNestedOneWithoutPageViewsInput = {
@@ -393,6 +511,9 @@ export type VisitorCreateWithoutPageViewsInput = {
   lastSeen?: Date | string
   userAgent?: string | null
   referrer?: string | null
+  sessionStartedAt?: Date | string
+  lastActivityAt?: Date | string
+  durationSeconds?: number
   events?: Prisma.AnalyticsEventCreateNestedManyWithoutVisitorInput
 }
 
@@ -403,6 +524,9 @@ export type VisitorUncheckedCreateWithoutPageViewsInput = {
   lastSeen?: Date | string
   userAgent?: string | null
   referrer?: string | null
+  sessionStartedAt?: Date | string
+  lastActivityAt?: Date | string
+  durationSeconds?: number
   events?: Prisma.AnalyticsEventUncheckedCreateNestedManyWithoutVisitorInput
 }
 
@@ -429,6 +553,9 @@ export type VisitorUpdateWithoutPageViewsInput = {
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActivityAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationSeconds?: Prisma.IntFieldUpdateOperationsInput | number
   events?: Prisma.AnalyticsEventUpdateManyWithoutVisitorNestedInput
 }
 
@@ -439,6 +566,9 @@ export type VisitorUncheckedUpdateWithoutPageViewsInput = {
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActivityAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationSeconds?: Prisma.IntFieldUpdateOperationsInput | number
   events?: Prisma.AnalyticsEventUncheckedUpdateManyWithoutVisitorNestedInput
 }
 
@@ -449,6 +579,9 @@ export type VisitorCreateWithoutEventsInput = {
   lastSeen?: Date | string
   userAgent?: string | null
   referrer?: string | null
+  sessionStartedAt?: Date | string
+  lastActivityAt?: Date | string
+  durationSeconds?: number
   pageViews?: Prisma.PageViewCreateNestedManyWithoutVisitorInput
 }
 
@@ -459,6 +592,9 @@ export type VisitorUncheckedCreateWithoutEventsInput = {
   lastSeen?: Date | string
   userAgent?: string | null
   referrer?: string | null
+  sessionStartedAt?: Date | string
+  lastActivityAt?: Date | string
+  durationSeconds?: number
   pageViews?: Prisma.PageViewUncheckedCreateNestedManyWithoutVisitorInput
 }
 
@@ -485,6 +621,9 @@ export type VisitorUpdateWithoutEventsInput = {
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActivityAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationSeconds?: Prisma.IntFieldUpdateOperationsInput | number
   pageViews?: Prisma.PageViewUpdateManyWithoutVisitorNestedInput
 }
 
@@ -495,6 +634,9 @@ export type VisitorUncheckedUpdateWithoutEventsInput = {
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActivityAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationSeconds?: Prisma.IntFieldUpdateOperationsInput | number
   pageViews?: Prisma.PageViewUncheckedUpdateManyWithoutVisitorNestedInput
 }
 
@@ -545,6 +687,9 @@ export type VisitorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   lastSeen?: boolean
   userAgent?: boolean
   referrer?: boolean
+  sessionStartedAt?: boolean
+  lastActivityAt?: boolean
+  durationSeconds?: boolean
   pageViews?: boolean | Prisma.Visitor$pageViewsArgs<ExtArgs>
   events?: boolean | Prisma.Visitor$eventsArgs<ExtArgs>
   _count?: boolean | Prisma.VisitorCountOutputTypeDefaultArgs<ExtArgs>
@@ -557,6 +702,9 @@ export type VisitorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   lastSeen?: boolean
   userAgent?: boolean
   referrer?: boolean
+  sessionStartedAt?: boolean
+  lastActivityAt?: boolean
+  durationSeconds?: boolean
 }, ExtArgs["result"]["visitor"]>
 
 export type VisitorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -566,6 +714,9 @@ export type VisitorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   lastSeen?: boolean
   userAgent?: boolean
   referrer?: boolean
+  sessionStartedAt?: boolean
+  lastActivityAt?: boolean
+  durationSeconds?: boolean
 }, ExtArgs["result"]["visitor"]>
 
 export type VisitorSelectScalar = {
@@ -575,9 +726,12 @@ export type VisitorSelectScalar = {
   lastSeen?: boolean
   userAgent?: boolean
   referrer?: boolean
+  sessionStartedAt?: boolean
+  lastActivityAt?: boolean
+  durationSeconds?: boolean
 }
 
-export type VisitorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "firstSeen" | "lastSeen" | "userAgent" | "referrer", ExtArgs["result"]["visitor"]>
+export type VisitorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "firstSeen" | "lastSeen" | "userAgent" | "referrer" | "sessionStartedAt" | "lastActivityAt" | "durationSeconds", ExtArgs["result"]["visitor"]>
 export type VisitorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   pageViews?: boolean | Prisma.Visitor$pageViewsArgs<ExtArgs>
   events?: boolean | Prisma.Visitor$eventsArgs<ExtArgs>
@@ -599,6 +753,9 @@ export type $VisitorPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     lastSeen: Date
     userAgent: string | null
     referrer: string | null
+    sessionStartedAt: Date
+    lastActivityAt: Date
+    durationSeconds: number
   }, ExtArgs["result"]["visitor"]>
   composites: {}
 }
@@ -1030,6 +1187,9 @@ export interface VisitorFieldRefs {
   readonly lastSeen: Prisma.FieldRef<"Visitor", 'DateTime'>
   readonly userAgent: Prisma.FieldRef<"Visitor", 'String'>
   readonly referrer: Prisma.FieldRef<"Visitor", 'String'>
+  readonly sessionStartedAt: Prisma.FieldRef<"Visitor", 'DateTime'>
+  readonly lastActivityAt: Prisma.FieldRef<"Visitor", 'DateTime'>
+  readonly durationSeconds: Prisma.FieldRef<"Visitor", 'Int'>
 }
     
 
