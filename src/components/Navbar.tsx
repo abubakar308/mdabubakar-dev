@@ -20,7 +20,7 @@ const navLinks = [
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
-  { name: "Education", href: "#education" },
+  { name: "Experience", href: "#experience" }, // Education থেকে ঠিক করা হলো
   { name: "Contact", href: "#contact" },
 ];
 
@@ -29,10 +29,31 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
+    // Scroll event-এ পেজ রেন্ডার আটকাতে throttle (requestAnimationFrame)
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // ড্রয়ার ওপেন থাকলে পেছনের স্ক্রল বন্ধ করা (Lenis bypass)
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
 
   const navClasses = cn(
     "fixed left-0 right-0 top-0 z-50 transition-all duration-500",
@@ -44,26 +65,21 @@ export default function Navbar() {
   return (
     <header className={navClasses}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-10">
-        {/* Logo — "AB" monogram */}
-        <Link
-          href="/"
-          aria-label="Go to homepage"
-          className="flex items-center gap-3.5 group"
-        >
+        
+        {/* Logo */}
+        <Link href="/" aria-label="Go to homepage" className="flex items-center gap-3.5 group">
           <div className="bg-teal-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center shadow-lg shadow-teal-500/20 group-hover:scale-105 transition-transform duration-300">
             AB
           </div>
-          <span className="text-xl font-heading font-bold text-foreground tracking-tight">Abu Bakar</span>
+          <span className="text-xl font-heading font-bold text-foreground tracking-tight hidden sm:block">
+            Abu Bakar
+          </span>
         </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden items-center gap-2 md:flex lg:gap-4">
           {navLinks.map((link) => (
-            <motion.div
-              key={link.name}
-              whileHover={{ y: -1 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div key={link.name} whileHover={{ y: -1 }} whileTap={{ scale: 0.95 }}>
               <a
                 href={link.href}
                 className="px-4 py-2 rounded-xl text-[13px] font-bold text-foreground/70 hover:text-accent-brand hover:bg-accent-brand/5 transition-all duration-300 uppercase tracking-[0.14em]"
@@ -72,8 +88,7 @@ export default function Navbar() {
               </a>
             </motion.div>
           ))}
-
-          <div className="ml-4 rounded-full border border-border bg-card/50 p-1 shadow-sm transition-hover hover:border-accent-brand/40">
+          <div className="ml-4 rounded-full border border-border bg-card/50 p-1 shadow-sm transition-colors hover:border-accent-brand/40">
             <ThemeToggle />
           </div>
         </nav>
@@ -88,6 +103,7 @@ export default function Navbar() {
                 variant="ghost"
                 size="icon"
                 className="rounded-xl border border-border bg-card/50 text-foreground shadow-sm hover:bg-accent-brand/5 hover:text-accent-brand h-10 w-10"
+                aria-label="Open menu"
               >
                 <Menu className="h-5 w-5" />
               </Button>
@@ -100,16 +116,10 @@ export default function Navbar() {
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-teal-500 text-white font-bold text-sm shadow-md shadow-teal-500/10">
                       AB
                     </div>
-                    <span className="text-lg font-bold text-foreground tracking-tight">
-                      Abu Bakar
-                    </span>
+                    <span className="text-lg font-bold text-foreground tracking-tight">Abu Bakar</span>
                   </div>
                   <DrawerClose asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="rounded-xl border border-border bg-card/50 text-foreground hover:bg-accent-brand/10 hover:text-accent-brand h-9 w-9"
-                    >
+                    <Button variant="ghost" size="icon" className="rounded-xl border border-border bg-card/50 hover:bg-accent-brand/10 h-9 w-9">
                       <X className="h-5 w-5" />
                     </Button>
                   </DrawerClose>
@@ -121,7 +131,7 @@ export default function Navbar() {
                   </DrawerTitle>
                 </div>
 
-                <nav className="flex flex-1 flex-col gap-1 px-4 py-4">
+                <nav className="flex flex-1 flex-col gap-1 px-4 py-4 overflow-y-auto">
                   {navLinks.map((link) => (
                     <a
                       key={link.name}
@@ -134,17 +144,6 @@ export default function Navbar() {
                     </a>
                   ))}
                 </nav>
-
-                <div className="mt-auto p-7 pt-4">
-                  <div className="pt-6 text-center border-t border-border/40">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30">
-                      Full Stack Developer
-                    </p>
-                    <p className="text-[10px] font-medium text-foreground/20 mt-1">
-                      © {new Date().getFullYear()} Md Abu Bakar Siddique
-                    </p>
-                  </div>
-                </div>
               </div>
             </DrawerContent>
           </Drawer>
