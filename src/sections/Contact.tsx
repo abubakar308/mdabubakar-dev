@@ -56,7 +56,7 @@ export default function Contact() {
             {/* Contact Cards */}
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
               {contactCards.map((card, index) => (
-                <Reveal key={card.label} horizontal delay={0.1 * index}>
+               <Reveal key={card.label} delay={0.1 * index}>
                   <a
                     href={card.href}
                     target="_blank"
