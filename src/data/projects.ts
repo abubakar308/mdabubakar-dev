@@ -2,6 +2,7 @@ export interface Project {
   name: string;
   description: string;
   image: string;
+   images?: string[];
   stack: string[];
   liveLink: string;
   github_client: string;

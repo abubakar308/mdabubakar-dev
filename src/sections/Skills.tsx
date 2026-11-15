@@ -18,13 +18,10 @@ import {
   SiReact,
   SiTailwindcss,
   SiTypescript,
-  SiDocker,
   SiVercel,
-  SiFirebase,
-  SiSupabase,
+  SiDocker,
 } from "react-icons/si";
 import Reveal from "@/components/common/Reveal";
-import { Badge } from "@/components/ui/badge";
 
 type SkillItem = {
   name: string;
@@ -47,8 +44,7 @@ const skillCategories: SkillCategory[] = [
       { name: "TypeScript", icon: SiTypescript },
       { name: "React", icon: SiReact },
       { name: "Next.js", icon: SiNextdotjs },
-      { name: "Tailwind CSS", icon: SiTailwindcss },
-      { name: "Figma", icon: SiFigma },
+      { name: "Tailwind", icon: SiTailwindcss },
     ],
   },
   {
@@ -59,114 +55,104 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: "Database",
+    title: "Database & ORM",
     skills: [
       { name: "MongoDB", icon: SiMongodb },
       { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "Firebase", icon: SiFirebase },
-      { name: "Supabase", icon: SiSupabase },
-    ],
-  },
-  {
-    title: "ORM",
-    skills: [
       { name: "Prisma", icon: SiPrisma, highlight: true },
     ],
   },
   {
-    title: "Tools",
+    title: "Tools & Others",
     skills: [
       { name: "Git", icon: SiGit },
       { name: "GitHub", icon: SiGithub },
       { name: "Postman", icon: SiPostman },
-      { name: "Docker", icon: SiDocker },
       { name: "Vercel", icon: SiVercel },
+      { name: "Figma", icon: SiFigma },
+      { name: "Docker", icon: SiDocker },
     ],
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative overflow-hidden bg-background py-12 md:py-16">
-      {/* Subtle Background Glows */}
-      <div className="absolute left-[10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-accent-brand/[0.03] blur-[120px] pointer-events-none" />
-      <div className="absolute right-[10%] bottom-[-10%] h-[500px] w-[500px] rounded-full bg-blue-500/[0.03] blur-[120px] pointer-events-none" />
+    <section id="skills" className="relative overflow-hidden bg-section py-16 md:py-24">
+      {/* Background Glows */}
+      <div className="absolute left-[-10%] top-[20%] h-[300px] w-[300px] rounded-full bg-accent-brand/[0.04] blur-[100px] pointer-events-none" />
+      <div className="absolute right-[-10%] bottom-[10%] h-[300px] w-[300px] rounded-full bg-blue-500/[0.04] blur-[100px] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
         {/* Header */}
-        <Reveal width="100%">
-          <div className="space-y-4 max-w-3xl mb-24">
+        <Reveal>
+          <div className="space-y-4 max-w-3xl mb-12 md:mb-16">
             <div className="flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-[11px] sm:text-xs">
-              <span className="h-0.5 w-10 bg-accent-brand" />
+              <span className="h-0.5 w-8 bg-accent-brand" />
               Technical Stack
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-[1.1] tracking-tight">
-              Crafting with <br />
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-foreground leading-tight tracking-tight">
+              Crafting with <br className="hidden sm:block" />
               <span className="text-accent-brand">Modern Tech</span>
             </h2>
-            <p className="text-text-body/70 text-base sm:text-lg leading-relaxed max-w-2xl font-medium">
+            <p className="text-text-body text-sm sm:text-base leading-relaxed max-w-2xl">
               A recruiter-friendly overview of my core competencies, organized by
-              specialization for efficient review and technical assessment.
+              specialization for efficient review.
             </p>
           </div>
         </Reveal>
 
-        {/* Categories Grid */}
-        <div className="grid gap-12 md:gap-16">
+        {/* Categories Wrapper */}
+        <div className="space-y-10 md:space-y-12">
           {skillCategories.map((category, catIndex) => (
-            <div key={category.title} className="space-y-8">
+            <div key={category.title} className="space-y-5">
+              
+              {/* Category Title */}
               <Reveal delay={catIndex * 0.05}>
-                <div className="flex items-center gap-6">
-                  <h3 className="text-xs font-extrabold uppercase tracking-[0.3em] text-foreground/30 whitespace-nowrap">
+                <div className="flex items-center gap-4">
+                  <h3 className="text-xs font-extrabold uppercase tracking-[0.2em] text-foreground/50 whitespace-nowrap">
                     {category.title}
                   </h3>
-                  <div className="h-px flex-1 bg-border/40" />
+                  <div className="h-px flex-1 bg-border/60" />
                 </div>
               </Reveal>
 
-              <div className="flex flex-wrap gap-4 sm:gap-6">
+              {/* Skill Badges Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
                 {category.skills.map((skill, index) => (
                   <Reveal
                     key={skill.name}
-                    delay={catIndex * 0.05 + index * 0.02}
-                    horizontal
-                    className="h-full"
+                    delay={catIndex * 0.05 + index * 0.03}
                   >
                     <div className={`
-                      group relative overflow-hidden flex items-center gap-3.5 px-6 py-3.5 rounded-2xl border transition-all duration-500
+                      h-full flex items-center gap-3 p-3 md:p-4 rounded-2xl border transition-all duration-300
                       ${skill.highlight
-                        ? "bg-accent-brand/[0.08] border-accent-brand/40 shadow-lg shadow-accent-brand/5 scale-[1.05]"
-                        : "bg-card/40 border-border/50 hover:border-accent-brand/30 hover:bg-card hover:-translate-y-1 hover:shadow-xl hover:shadow-accent-brand/5"
+                        ? "bg-accent-brand/[0.08] border-accent-brand/40 shadow-md shadow-accent-brand/5"
+                        : "bg-card/60 border-border/60 hover:border-accent-brand/30 hover:bg-card hover:-translate-y-1 hover:shadow-lg"
                       }
                     `}>
-                      {/* Icon Container */}
+                      {/* Icon */}
                       <div className={`
-                        flex items-center justify-center transition-all duration-500
-                        ${skill.highlight ? "text-accent-brand scale-110" : "text-foreground/40 group-hover:text-accent-brand group-hover:scale-110"}
+                        flex items-center justify-center p-2 rounded-xl transition-transform duration-300
+                        ${skill.highlight ? "bg-accent-brand/10 text-accent-brand" : "bg-background text-foreground/60"}
                       `}>
-                        <skill.icon className="w-5 h-5" />
+                        <skill.icon className="w-4 h-4 md:w-5 md:h-5" />
                       </div>
 
-                      {/* Info */}
+                      {/* Text */}
                       <div className="flex flex-col">
                         <span className={`
-                          text-xs font-bold uppercase tracking-widest transition-colors
-                          ${skill.highlight ? "text-foreground" : "text-text-body/60 group-hover:text-foreground"}
+                          text-xs md:text-sm font-bold tracking-wide transition-colors
+                          ${skill.highlight ? "text-foreground" : "text-text-body"}
                         `}>
                           {skill.name}
                         </span>
                         {skill.highlight && (
-                          <span className="text-[8px] font-extrabold text-accent-brand uppercase tracking-tighter mt-0.5 animate-pulse">
-                            Primary Choice
+                          <span className="text-[9px] font-extrabold text-accent-brand uppercase tracking-widest mt-0.5">
+                            Primary
                           </span>
                         )}
                       </div>
-
-                      {/* Decorative corner glow for highlight */}
-                      {skill.highlight && (
-                        <div className="absolute top-0 right-0 h-8 w-8 bg-accent-brand/10 blur-xl rounded-full" />
-                      )}
                     </div>
                   </Reveal>
                 ))}
