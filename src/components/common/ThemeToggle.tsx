@@ -1,28 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(
-    () =>
-      typeof document !== "undefined" &&
-      document.documentElement.classList.contains("dark")
-  );
+  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // পেজ লোড হওয়ার পর চেক করব স্ক্রিপ্টের ফলে ডার্ক ক্লাস আছে কিনা
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
 
   const toggleTheme = () => {
     if (isDark) {
       document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
       localStorage.setItem("theme", "light");
       setIsDark(false);
     } else {
       document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
       localStorage.setItem("theme", "dark");
       setIsDark(true);
     }
   };
+
+  // হাইড্রেশন এরর এড়াতে মাউন্ট হওয়ার আগে শুধু একটি প্লেসহোল্ডার দেখাবে
+  if (!mounted) {
+    return <div className="w-10 h-10 rounded-full bg-slate-200/50 dark:bg-slate-800/50" />;
+  }
 
   return (
     <Button

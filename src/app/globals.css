@@ -7,6 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --font-heading: var(--font-space-grotesk);
   --font-body: var(--font-inter);
 
@@ -37,14 +38,17 @@
   --radius-3xl: calc(var(--radius) * 2.2);
 }
 
+/* Light Theme */
 :root {
-  /* Premium Light Theme */
+  color-scheme: light;
+
   --background: #f8fafc;
   --section: #ffffff;
   --card: #f1f5f9;
   --border: #e2e8f0;
   --foreground: #0f172a;
   --text-body: #475569;
+
   --accent-brand: #0891b2;
   --accent-soft: #06b6d4;
 
@@ -59,17 +63,21 @@
   --destructive: #ef4444;
   --input: #e2e8f0;
   --ring: #0891b2;
+
   --radius: 0.75rem;
 }
 
+/* Dark Theme */
 .dark {
-  /* Premium Dark Theme */
+  color-scheme: dark;
+
   --background: #020617;
   --section: #0f172a;
   --card: #1e293b;
   --border: #334155;
   --foreground: #f8fafc;
   --text-body: #94a3b8;
+
   --accent-brand: #22d3ee;
   --accent-soft: #67e8f9;
 
@@ -87,29 +95,58 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50 transition-colors duration-300;
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
   }
 
   html {
     @apply bg-background;
-    font-size: 15px; /* Base size for better desktop readability */
+    font-size: 100%;
+     scroll-padding-top: 88px;
+      transition: background-color 0.3s ease, color 0.3s ease; 
   }
 
   body {
     @apply bg-background text-text-body font-body antialiased;
+    min-width: 320px;
     line-height: 1.625;
+     overflow-x: clip;
+     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading uppercase tracking-[-0.02em] text-foreground;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-foreground;
+    text-wrap: balance;
   }
 
-  h1 { @apply tracking-[-0.04em]; }
-  h2 { @apply tracking-[-0.03em]; }
+  h1 {
+    letter-spacing: -0.04em;
+  }
+
+  h2 {
+    letter-spacing: -0.03em;
+  }
+
+  ::selection {
+    background-color: var(--accent-brand);
+    color: #ffffff;
+  }
+
+   :focus-visible {
+    outline: 2px solid var(--accent-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
-/* Lenis Smooth Scroll Stylings */
+/* Lenis Smooth Scroll */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -131,10 +168,12 @@ html.lenis body {
   pointer-events: none;
 }
 
+/* Skills Marquee Animations */
 @keyframes skill-marquee-left {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
@@ -144,6 +183,7 @@ html.lenis body {
   from {
     transform: translateX(-50%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -157,6 +197,19 @@ html.lenis body {
   animation: skill-marquee-right 45s linear infinite;
 }
 
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 
-
-
+  .animate-skill-marquee-left,
+  .animate-skill-marquee-right {
+    animation: none !important;
+  }
+}
