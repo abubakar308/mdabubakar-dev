@@ -100,19 +100,21 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </button>
 
             <div className="overflow-y-auto flex-1 min-h-0" data-lenis-prevent>
-              {/* Image */}
-              <div className="relative w-full aspect-video overflow-hidden flex-shrink-0">
+                           {/* Image */}
+              <div className="relative w-full aspect-video sm:aspect-[16/9] overflow-hidden flex-shrink-0 bg-muted/30 border-b border-border/50 flex items-center justify-center">
                 <Image
                   src={project.image}
                   alt={project.name}
                   fill
-                  className="object-cover"
+                  className="object-contain object-top p-2"
                   onError={(e) => { e.currentTarget.src = "/images/project-fallback.jpg"; }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90 pointer-events-none" />
                 
-                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                  <h2 className="text-xl md:text-2xl font-heading font-extrabold text-white leading-tight drop-shadow-md">
+                {/* Title Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-10">
+                  <h2 className="text-xl md:text-2xl font-heading font-extrabold text-foreground leading-tight">
                     {project.name}
                   </h2>
                 </div>

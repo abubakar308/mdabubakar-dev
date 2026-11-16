@@ -14,7 +14,7 @@ interface RevealProps {
 export default function Reveal({
   children,
   delay = 0.1,
-  width = "100%", // ডিফল্ট ১০০% করা হলো যাতে কার্ডগুলো গ্রিডে ঠিকমতো বসে
+  width = "100%",
   className,
   horizontal = false,
 }: RevealProps) {
@@ -27,8 +27,8 @@ export default function Reveal({
         variants={{
           hidden: { 
             opacity: 0, 
-            y: horizontal ? 0 : 30, 
-            x: horizontal ? 30 : 0 
+            y: horizontal ? 0 : 20, // মোবাইলে কম নড়াচড়া করবে
+            x: horizontal ? 20 : 0 
           },
           visible: { 
             opacity: 1, 
@@ -38,8 +38,9 @@ export default function Reveal({
         }}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }} // অ্যানিমেশন একটু আগে শুরু হবে
-        transition={{ duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] }} // আরও স্মুথ ইজিং
+        // margin: "-20px" করা হয়েছে যাতে আগেই ট্রিগার হয় এবং amount: 0.1 (১০% দেখা গেলেই অ্যানিমেশন হবে)
+        viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.1 }} 
+        transition={{ duration: 0.5, delay, ease: "easeOut" }}
         className="h-full"
       >
         {children}

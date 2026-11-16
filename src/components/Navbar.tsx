@@ -28,9 +28,10 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
+  // Scroll listener (Navbar background)
   useEffect(() => {
-    // Scroll event-এ পেজ রেন্ডার আটকাতে throttle (requestAnimationFrame)
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -41,12 +42,32 @@ export default function Navbar() {
         ticking = true;
       }
     };
-    
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ড্রয়ার ওপেন থাকলে পেছনের স্ক্রল বন্ধ করা (Lenis bypass)
+  // Active Section Detection
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -80% 0px" } // স্ক্রিনের ২০% থেকে ৮০% এর মধ্যে থাকলে অ্যাক্টিভ হবে
+    );
+
+    navLinks.forEach((link) => {
+      const element = document.getElementById(link.href.replace("#", ""));
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Drawer open/close body lock
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -78,18 +99,26 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-2 md:flex lg:gap-4">
-          {navLinks.map((link) => (
-            <motion.div key={link.name} whileHover={{ y: -1 }} whileTap={{ scale: 0.95 }}>
-              <a
-                href={link.href}
-                className="px-4 py-2 rounded-xl text-[13px] font-bold text-foreground/70 hover:text-accent-brand hover:bg-accent-brand/5 transition-all duration-300 uppercase tracking-[0.14em]"
-              >
-                {link.name}
-              </a>
-            </motion.div>
-          ))}
-          <div className="ml-4 rounded-full border border-border bg-card/50 p-1 shadow-sm transition-colors hover:border-accent-brand/40">
+        <nav className="hidden items-center gap-1 md:flex lg:gap-2">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.replace("#", "");
+            return (
+              <motion.div key={link.name} whileHover={{ y: -1 }} whileTap={{ scale: 0.95 }}>
+                <a
+                  href={link.href}
+                  className={cn(
+                    "px-3 py-2 rounded-xl text-[13px] font-bold uppercase tracking-[0.14em] transition-all duration-300",
+                    isActive 
+                      ? "text-accent-brand bg-accent-brand/10" 
+                      : "text-foreground/70 hover:text-accent-brand hover:bg-accent-brand/5"
+                  )}
+                >
+                  {link.name}
+                </a>
+              </motion.div>
+            );
+          })}
+          <div className="ml-4">
             <ThemeToggle />
           </div>
         </nav>
@@ -133,17 +162,28 @@ export default function Navbar() {
                 </div>
 
                 <nav className="flex flex-1 flex-col gap-1 px-4 py-4 overflow-y-auto">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="group flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-bold uppercase tracking-[0.15em] text-foreground/75 transition-all duration-300 hover:bg-accent-brand/5 hover:text-accent-brand"
-                    >
-                      {link.name}
-                      <ArrowRight className="h-4 w-4 opacity-0 -translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
-                    </a>
-                  ))}
+                  {navLinks.map((link) => {
+                    const isActive = activeSection === link.href.replace("#", "");
+                    return (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          "group flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-bold uppercase tracking-[0.15em] transition-all duration-300",
+                          isActive 
+                            ? "bg-accent-brand/10 text-accent-brand" 
+                            : "text-foreground/75 hover:bg-accent-brand/5 hover:text-accent-brand"
+                        )}
+                      >
+                        {link.name}
+                        <ArrowRight className={cn(
+                          "h-4 w-4 transition-all duration-300",
+                          isActive ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0"
+                        )} />
+                      </a>
+                    );
+                  })}
                 </nav>
               </div>
             </DrawerContent>

@@ -11,7 +11,6 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     setMounted(true);
-    // পেজ লোড হওয়ার পর চেক করব স্ক্রিপ্টের ফলে ডার্ক ক্লাস আছে কিনা
     setIsDark(document.documentElement.classList.contains("dark"));
   }, []);
 
@@ -29,7 +28,6 @@ export default function ThemeToggle() {
     }
   };
 
-  // হাইড্রেশন এরর এড়াতে মাউন্ট হওয়ার আগে শুধু একটি প্লেসহোল্ডার দেখাবে
   if (!mounted) {
     return <div className="w-10 h-10 rounded-full bg-slate-200/50 dark:bg-slate-800/50" />;
   }
@@ -39,27 +37,30 @@ export default function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      className="relative rounded-full w-10 h-10 bg-slate-200/50 dark:bg-slate-800/50 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 transition-colors"
+      className="relative rounded-full w-10 h-10 bg-slate-200/50 dark:bg-slate-800/50 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 transition-colors overflow-hidden"
+      style={{ outline: 'none', boxShadow: 'none' }}
       aria-label="Toggle theme"
     >
       <AnimatePresence mode="wait" initial={false}>
         {isDark ? (
           <motion.div
             key="moon"
-            initial={{ y: -20, opacity: 0, rotate: 45 }}
-            animate={{ y: 0, opacity: 1, rotate: 0 }}
-            exit={{ y: 20, opacity: 0, rotate: -45 }}
-            transition={{ duration: 0.2 }}
+            initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
+            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+            exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="absolute inset-0 flex items-center justify-center"
           >
-            <Moon className="w-5 h-5 text-white" />
+            <Moon className="w-5 h-5 text-accent-brand" />
           </motion.div>
         ) : (
           <motion.div
             key="sun"
-            initial={{ y: -20, opacity: 0, rotate: -45 }}
-            animate={{ y: 0, opacity: 1, rotate: 0 }}
-            exit={{ y: 20, opacity: 0, rotate: 45 }}
-            transition={{ duration: 0.2 }}
+            initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
+            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+            exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="absolute inset-0 flex items-center justify-center"
           >
             <Sun className="w-5 h-5 text-yellow-500" />
           </motion.div>

@@ -7,27 +7,14 @@ const experienceItems = [
   {
     role: "Full Stack Developer",
     company: "Digital Aid IT",
-    type: "Professional Project",
-    period: "2024 – Present",
+    type: "Full Stack Development", 
+    period: "April 2026 – September 2026",
     description:
-      "Developed a CRM and Multichannel Outreach platform, building scalable backend services and interactive frontend components to manage customer interactions efficiently.",
+      "Developed full-stack features for a CRM and Multichannel Outreach platform, building scalable backend services and interactive frontend components.",
     achievements: [
-      "Engineered RESTful APIs using Node.js, Express, and PostgreSQL.",
-      "Built responsive dashboards with React and Tailwind CSS.",
-      "Implemented secure authentication and role-based access control (RBAC)."
-    ]
-  },
-  {
-    role: "Frontend Developer",
-    company: "eComUp.ai",
-    type: "Professional Project",
-    period: "2023 – 2024",
-    description:
-      "Built a comprehensive admin dashboard for an AI-powered eCommerce platform, focusing on data visualization and seamless user experience.",
-    achievements: [
-      "Integrated complex data tables and charts for real-time analytics.",
-      "Optimized application performance, reducing load times by 30%.",
-      "Collaborated with the backend team to integrate REST APIs."
+      "Implemented authentication, Role-Based Access Control (RBAC), People, Companies, Lists, filtering, and search features.",
+      "Built CSV/XLSX import/export, AI-assisted search, and email outreach functionality.",
+      "Contributed to eComUp.ai admin dashboard, AI-powered social media features, API integration, and debugging."
     ]
   }
 ];
@@ -45,7 +32,7 @@ export default function Experience() {
               My Journey
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-foreground leading-tight tracking-tight">
-              Professional <span className="text-accent-brand">Experience</span>
+              Development <span className="text-accent-brand">Experience</span>
             </h2>
             <p className="text-text-body text-sm sm:text-base leading-relaxed max-w-2xl">
               My hands-on experience building scalable, production-ready applications
